@@ -72,8 +72,8 @@ def collect():
         if bangumi:bangumi['refresh_status']='stale'
     previous=Path(__file__).resolve().parents[1]/'data/stats.json'
     previous_data=json.loads(previous.read_text(encoding='utf-8')) if previous.is_file() else {}
-    from star_growth import collect as collect_star_growth
-    star_growth=collect_star_growth(repos,str(today),get)
+    from star_growth import refresh as refresh_star_growth
+    star_growth=refresh_star_growth(repos,str(today),get,previous_data.get('star_growth'))
     from bilibili_profile import refresh as refresh_bilibili
     bilibili=refresh_bilibili(previous_data.get('bilibili'))
     platform_links={'afdian':'https://afdian.com/a/hxwd94666'}

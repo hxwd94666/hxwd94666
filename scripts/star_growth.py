@@ -33,3 +33,13 @@ def collect(repos, as_of, get):
         assert len(values) == repo['stargazers_count'], 'Star count changed during collection; rerun'
         dates[repo['name']] = values
     return summarize(dates, as_of)
+
+
+def refresh(repos, as_of, get, previous=None):
+    """Keep the last verified series when GitHub temporarily rejects the API request."""
+    try:
+        return collect(repos, as_of, get)
+    except Exception:
+        if previous:
+            return dict(previous, refresh_status='stale')
+        raise

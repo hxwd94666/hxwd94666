@@ -56,4 +56,12 @@ class ProfileTests(unittest.TestCase):
         self.assertEqual(actual, dict(prior, refresh_status='stale'))
         self.assertNotIn('refresh_status', prior)
 
+    def test_failed_star_growth_fetch_preserves_values(self):
+        from star_growth import refresh
+        prior = json.loads((ROOT / 'data/stats.json').read_text(encoding='utf-8'))['star_growth']
+        def failed(*args, **kwargs): raise RuntimeError('API rate limit fixture')
+        repos = [{'full_name': 'owner/repo', 'name': 'repo', 'fork': False, 'stargazers_count': 1}]
+        actual = refresh(repos, '2026-10-19', failed, previous=prior)
+        self.assertEqual(actual, dict(prior, refresh_status='stale'))
+
 if __name__ == '__main__': unittest.main()
