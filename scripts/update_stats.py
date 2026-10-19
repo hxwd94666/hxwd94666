@@ -90,6 +90,6 @@ def main():
     data=json.loads(args.snapshot.read_text(encoding='utf-8')) if args.snapshot else collect()
     summary=render(data,args.root)
     (args.root/'data').mkdir(exist_ok=True)
-    (args.root/'data/stats.json').write_text(json.dumps(data,indent=2)+'\n',encoding='utf-8')
+    (args.root/'data/stats.json').write_text(json.dumps(data,indent=2)+'\n',encoding='utf-8',newline='\n')
     print(json.dumps(summary,sort_keys=True))
 if __name__=='__main__':main()

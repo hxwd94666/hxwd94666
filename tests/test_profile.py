@@ -21,17 +21,20 @@ class ProfileTests(unittest.TestCase):
             urls = ['https://space.bilibili.com/436632831', 'https://steamcommunity.com/profiles/76561198402274250/', 'https://bgm.tv/user/hxwd94666']
             positions = [text.index(url) for url in urls]
             self.assertEqual(positions, sorted(positions))
-            self.assertIn('support on Afdian', text)
+            self.assertNotIn('support on Afdian', text)
             self.assertNotIn('xiaoheihe', text)
             self.assertNotIn('y.qq.com', text)
         self.assertIn("p.src='../assets/cards/'", (ROOT / 'preview/index.html').read_text(encoding='utf-8'))
 
     def test_cards_and_colors(self):
-        self.assertEqual(len(list((ROOT / 'assets/cards').glob('*.svg'))), 22)
+        self.assertEqual(len(list((ROOT / 'assets/cards').glob('*.svg'))), 18)
         for theme in ('dark', 'light'):
             for name in ('projects', 'releases', 'star-growth', 'bilibili', 'steam', 'bangumi'):
                 xml = ET.parse(ROOT / 'assets/cards' / f'{name}-{theme}.svg').getroot()
                 self.assertEqual((xml.get('width'), xml.get('height')), ('296', '144'))
+            for name, size in (('overview', ('920', '40')), ('activity', ('920', '236')), ('insights', ('920', '180'))):
+                xml = ET.parse(ROOT / 'assets/cards' / f'{name}-{theme}.svg').getroot()
+                self.assertEqual((xml.get('width'), xml.get('height')), size)
         for name, color in [('bilibili', '#35232e'), ('steam', '#352938'), ('bangumi', '#392d44')]:
             self.assertIn(color, (ROOT / 'assets/cards' / f'{name}-dark.svg').read_text(encoding='utf-8'))
 

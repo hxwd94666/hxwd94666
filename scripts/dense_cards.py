@@ -39,12 +39,6 @@ def render(data,root):
             s=f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title"><title id="title">{name} · public data · {data["as_of"]}</title><g font-family="Consolas,Menlo,DejaVu Sans Mono,monospace">{content}</g></svg>'
             (out/f'{name}-{theme}.svg').write_text(s,encoding='utf-8')
 
-        account=data.get('account',{})
-        content=t(0,31,'WuDu',29,'text',700)+t(106,30,'@hxwd94666',12,'muted')
-        svg('profile',46,content,width=202)
-        content=t(170,16,f'SINCE {account.get("created_at","2022")[:4]} / {account.get("followers",1)} FOLLOWER',10,'muted',anchor='end')+t(170,34,data['as_of'],11,'muted',anchor='end')
-        svg('profile-meta',46,content,width=170)
-
         content=rect(0,0,920,40,'panel')
         entries=[('STARS',stars,'#e3b341' if theme=='dark' else '#9a6700'),('FORKS',forks,'#f0883e' if theme=='dark' else '#bc4c00'),('DOWNLOADS',downloads,'blue'),('RELEASES',len(releases),'violet'),('CONTRIBUTIONS',total,'green'),('ACTIVE DAYS',active,'#f778ba' if theme=='dark' else '#bf3989')]
         for i,(label,n,color) in enumerate(entries):

@@ -1,16 +1,3 @@
-<p>
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/cards/profile-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/cards/profile-light.svg">
-  <img src="assets/cards/profile-light.svg" alt="WuDu / @hxwd94666" width="202" height="46" align="middle">
-</picture> &nbsp; <a href="https://afdian.com/a/hxwd94666">support on Afdian</a>
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/cards/profile-meta-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/cards/profile-meta-light.svg">
-  <img src="assets/cards/profile-meta-light.svg" alt="Account / snapshot date" width="170" height="46" align="right">
-</picture>
-</p>
-
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/cards/overview-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/cards/overview-light.svg">
