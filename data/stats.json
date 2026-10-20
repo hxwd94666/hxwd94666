@@ -8,11 +8,11 @@
   },
   "languages_by_repo": {
     "Echo-Workshop": {
-      "Python": 2431044,
-      "Rust": 206118
+      "Python": 2477000,
+      "Rust": 206422
     },
     "hxwd94666": {
-      "Python": 33042,
+      "Python": 33791,
       "HTML": 4609
     },
     "NTE-Drive-Calculator": {
@@ -24,13 +24,13 @@
     }
   },
   "community": {
-    "issues_open": 1,
-    "issues_closed": 9,
-    "prs_open": 0,
+    "issues_open": 0,
+    "issues_closed": 11,
+    "prs_open": 1,
     "prs_merged": 11,
     "prs_closed_unmerged": 1
   },
-  "community_as_of": "2026-10-19",
+  "community_as_of": "2026-10-20",
   "steam": {
     "id": "76561198402274250",
     "url": "https://steamcommunity.com/profiles/76561198402274250/",
@@ -38,7 +38,7 @@
     "state": "offline",
     "member_since": "July 6, 2017",
     "privacy": "public",
-    "as_of": "2026-10-19",
+    "as_of": "2026-10-20",
     "level": 18,
     "games": 107,
     "badges": 13
@@ -46,7 +46,7 @@
   "bangumi": {
     "username": "hxwd94666",
     "url": "https://bgm.tv/user/hxwd94666",
-    "as_of": "2026-10-19",
+    "as_of": "2026-10-20",
     "subject_type": 2,
     "counts": {
       "1": 4,
@@ -62,12 +62,12 @@
     "url": "https://space.bilibili.com/436632831",
     "name": "\u98de\u884c\u5e93\u51af",
     "avatar_url": "https://i0.hdslb.com/bfs/face/21e43b46de5baef42ee4b65a032e4895bae5da7b.jpg",
-    "as_of": "2026-10-19",
+    "as_of": "2026-10-20",
     "source": "anonymous_public_api",
-    "followers": 1112,
+    "followers": 1113,
     "following": 38,
     "videos": 30,
-    "likes": 21930,
+    "likes": 21939,
     "level": 6
   },
   "star_growth": {
@@ -534,7 +534,7 @@
     "afdian": "https://afdian.com/a/hxwd94666"
   },
   "username": "hxwd94666",
-  "as_of": "2026-10-19",
+  "as_of": "2026-10-20",
   "repos": [
     {
       "license_spdx": null,
@@ -552,7 +552,7 @@
       "name": "Echo-Workshop",
       "full_name": "hxwd94666/Echo-Workshop",
       "fork": false,
-      "stargazers_count": 2,
+      "stargazers_count": 3,
       "forks_count": 0,
       "language": "Python",
       "html_url": "https://github.com/hxwd94666/Echo-Workshop",
@@ -585,8 +585,8 @@
       "name": "NTE-Drive-Calculator",
       "full_name": "hxwd94666/NTE-Drive-Calculator",
       "fork": false,
-      "stargazers_count": 322,
-      "forks_count": 23,
+      "stargazers_count": 323,
+      "forks_count": 22,
       "language": "Python",
       "html_url": "https://github.com/hxwd94666/NTE-Drive-Calculator",
       "open_issues_count": 5
@@ -634,7 +634,7 @@
       "assets": [
         {
           "name": "NTE_Drive_Calc_Setup_2.3.1.exe",
-          "download_count": 1066
+          "download_count": 1126
         }
       ]
     },
@@ -646,7 +646,7 @@
       "assets": [
         {
           "name": "NTE_Drive_Calc_Setup_2.3.0.exe",
-          "download_count": 1516
+          "download_count": 1520
         }
       ]
     },
@@ -2314,7 +2314,12 @@
     {
       "date": "2026-10-19",
       "level": 1,
-      "count": 6
+      "count": 7
+    },
+    {
+      "date": "2026-10-20",
+      "level": 1,
+      "count": 3
     }
   ]
 }
