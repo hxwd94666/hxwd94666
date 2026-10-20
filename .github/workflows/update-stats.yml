@@ -2,7 +2,10 @@ name: Refresh profile stats
 on:
   workflow_dispatch:
   schedule:
-    - cron: '19 1 * * *'
+    # UTC 01/07/13/19:19 = Asia/Shanghai 09/15/21 and next-day 03:19.
+    # Each run is skipped when data/stats.json already carries today's date,
+    # so a skipped or failed scheduled run is retried six hours later.
+    - cron: '19 1,7,13,19 * * *'
 permissions:
   contents: write
 concurrency:
@@ -13,13 +16,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Check whether already refreshed today
+        id: check
+        run: |
+          if python3 -B scripts/check_fresh_today.py; then
+            echo "need_refresh=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "need_refresh=true" >> "$GITHUB_OUTPUT"
+          fi
       - name: Run offline regression tests
+        if: steps.check.outputs.need_refresh == 'true'
         run: python3 -B -m unittest discover -s tests -v
       - name: Generate public-data cards
+        if: steps.check.outputs.need_refresh == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python3 -B scripts/update_stats.py
       - name: Commit generated cards
+        if: steps.check.outputs.need_refresh == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
