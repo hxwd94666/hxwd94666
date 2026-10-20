@@ -30,7 +30,7 @@
     "prs_merged": 11,
     "prs_closed_unmerged": 1
   },
-  "community_as_of": "2026-10-20",
+  "community_as_of": "2026-10-21",
   "steam": {
     "id": "76561198402274250",
     "url": "https://steamcommunity.com/profiles/76561198402274250/",
@@ -38,7 +38,7 @@
     "state": "offline",
     "member_since": "July 6, 2017",
     "privacy": "public",
-    "as_of": "2026-10-20",
+    "as_of": "2026-10-21",
     "level": 18,
     "games": 107,
     "badges": 13
@@ -46,7 +46,7 @@
   "bangumi": {
     "username": "hxwd94666",
     "url": "https://bgm.tv/user/hxwd94666",
-    "as_of": "2026-10-20",
+    "as_of": "2026-10-21",
     "subject_type": 2,
     "counts": {
       "1": 4,
@@ -62,12 +62,12 @@
     "url": "https://space.bilibili.com/436632831",
     "name": "\u98de\u884c\u5e93\u51af",
     "avatar_url": "https://i0.hdslb.com/bfs/face/21e43b46de5baef42ee4b65a032e4895bae5da7b.jpg",
-    "as_of": "2026-10-20",
+    "as_of": "2026-10-21",
     "source": "anonymous_public_api",
     "followers": 1113,
     "following": 38,
     "videos": 30,
-    "likes": 21939,
+    "likes": 21937,
     "level": 6
   },
   "star_growth": {
@@ -534,7 +534,7 @@
     "afdian": "https://afdian.com/a/hxwd94666"
   },
   "username": "hxwd94666",
-  "as_of": "2026-10-20",
+  "as_of": "2026-10-21",
   "repos": [
     {
       "license_spdx": null,
@@ -585,7 +585,7 @@
       "name": "NTE-Drive-Calculator",
       "full_name": "hxwd94666/NTE-Drive-Calculator",
       "fork": false,
-      "stargazers_count": 323,
+      "stargazers_count": 324,
       "forks_count": 22,
       "language": "Python",
       "html_url": "https://github.com/hxwd94666/NTE-Drive-Calculator",
@@ -634,7 +634,7 @@
       "assets": [
         {
           "name": "NTE_Drive_Calc_Setup_2.3.1.exe",
-          "download_count": 1126
+          "download_count": 1142
         }
       ]
     },
@@ -646,7 +646,7 @@
       "assets": [
         {
           "name": "NTE_Drive_Calc_Setup_2.3.0.exe",
-          "download_count": 1520
+          "download_count": 1521
         }
       ]
     },
@@ -2320,6 +2320,11 @@
       "date": "2026-10-20",
       "level": 1,
       "count": 3
+    },
+    {
+      "date": "2026-10-21",
+      "level": 0,
+      "count": 0
     }
   ]
 }
