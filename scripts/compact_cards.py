@@ -1,7 +1,7 @@
 """Two rows of three independent cards, 296 x 144. Never fabricate platform stats."""
 import base64
 import html
-from refresh_state import label as date_label, description, is_stale
+from refresh_state import label as date_label, description
 
 
 def render(data, root):
@@ -93,14 +93,13 @@ def render(data, root):
 
         bgm = data['bangumi'];counts=bgm['counts'];accent='#d6a7ff' if dark else '#8250df'
         content=avatar('bangumi-avatar.jpg')+t(58,25,'BANGUMI',10,accent,700)+t(58,43,bgm['username'],12,weight=600)
-        content+=t(284,27,f'{bgm["total"]} ANIME',13,accent,600,'end')+t(284,43,'STALE' if is_stale(data,'bangumi') else f'{counts["2"]/(bgm["total"] or 1):.0%} completed',8,muted,anchor='end')
+        content+=t(284,27,f'{bgm["total"]} ANIME',13,accent,600,'end')+t(284,43,date_label(data,'bangumi'),8,muted,anchor='end')
         xbar=12
         for i,(key,label,color) in enumerate([('2','COMPLETED','#a371f7'),('3','WATCHING','#3fb950'),('1','PLANNED','#58a6ff'),('4','ON HOLD','#d29922'),('5','DROPPED','#8b949e')]):
             x=12+i*55
             content+=t(x,91,counts[key],21,weight=600)+t(x,111,label,7,muted,600)
             width=272*counts[key]/(bgm['total'] or 1)
             content+=f'<rect x="{xbar}" y="128" width="{width}" height="4" fill="{color}"/>';xbar+=width
-        content+=t(284,141,date_label(data,'bangumi'),7,muted,anchor='end')
         save('bangumi',content,('#392d44','#201c30') if dark else ('#f0e5f5','#f7f3fc'))
 
         bili=data['bilibili'];accent='#f47ca9' if dark else '#b33c6f'

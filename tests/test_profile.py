@@ -48,6 +48,29 @@ class ProfileTests(unittest.TestCase):
                 self.assertEqual(source.read_bytes(), (target / 'assets/cards' / source.name).read_bytes(), source.name)
             self.assertEqual(json.loads((ROOT / 'data/stats.json').read_text(encoding='utf-8')), json.loads((target / 'data/stats.json').read_text(encoding='utf-8')))
 
+    def test_render_platform_dates_align(self):
+        from compact_cards import render
+        from refresh_state import label
+        data = json.loads((ROOT / 'data/stats.json').read_text(encoding='utf-8'))
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            shutil.copytree(ROOT / 'assets/avatars', root / 'assets/avatars')
+            for status in ('fresh', 'stale'):
+                for name in ('bilibili', 'steam', 'bangumi'):
+                    data.setdefault('refresh', {})[name] = {'status': status}
+                render(data, root)
+                for theme in ('dark', 'light'):
+                    for name in ('bilibili', 'steam', 'bangumi'):
+                        with self.subTest(status=status, theme=theme, platform=name):
+                            svg = ET.parse(root / 'assets/cards' / f'{name}-{theme}.svg').getroot()
+                            texts = list(svg.iter('{http://www.w3.org/2000/svg}text'))
+                            dates = [e for e in texts if data[name]['as_of'] in (e.text or '')]
+                            self.assertEqual(len(dates), 1)
+                            self.assertEqual(dates[0].text, label(data, name))
+                            self.assertEqual((dates[0].get('x'), dates[0].get('y'), dates[0].get('font-size'), dates[0].get('text-anchor')), ('284', '43', '8', 'end'))
+                            if name == 'bangumi':
+                                self.assertFalse(any('completed' in (e.text or '') for e in texts))
+
     def test_render_releases_by_total_downloads(self):
         from compact_cards import render
         data = json.loads((ROOT / 'data/stats.json').read_text(encoding='utf-8'))
