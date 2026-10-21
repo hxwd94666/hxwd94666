@@ -48,6 +48,28 @@ class ProfileTests(unittest.TestCase):
                 self.assertEqual(source.read_bytes(), (target / 'assets/cards' / source.name).read_bytes(), source.name)
             self.assertEqual(json.loads((ROOT / 'data/stats.json').read_text(encoding='utf-8')), json.loads((target / 'data/stats.json').read_text(encoding='utf-8')))
 
+    def test_render_releases_by_total_downloads(self):
+        from compact_cards import render
+        data = json.loads((ROOT / 'data/stats.json').read_text(encoding='utf-8'))
+        def release(tag, day, counts, draft=False):
+            return {'tag_name': tag, 'published_at': '2026-10-'+day+'T00:00:00Z', 'draft': draft,
+                    'assets': [{'download_count': count} for count in counts]}
+        data['releases'] = [release('newest', '21', [10]), release('older', '01', [180]),
+                            release('alpha', '02', [180]), release('popular', '01', [100, 100]),
+                            release('beta', '02', [180]), release('draft', '21', [9999], True)]
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            shutil.copytree(ROOT / 'assets/avatars', root / 'assets/avatars')
+            render(data, root)
+            for theme in ('dark', 'light'):
+                svg = ET.parse(root / 'assets/cards' / f'releases-{theme}.svg').getroot()
+                texts = [e for e in svg.iter('{http://www.w3.org/2000/svg}text')]
+                tags = [e.text for e in texts if e.get('x')=='12' and e.get('y') in ('65', '89', '113')]
+                counts = [e.text for e in texts if e.get('x')=='284' and e.get('y') in ('65', '89', '113')]
+                self.assertEqual(tags, ['popular', 'beta', 'alpha'])
+                self.assertEqual(counts, ['200', '180', '180'])
+                self.assertIn('TOP 3 DOWNLOADS', [e.text for e in texts])
+
     def test_failed_public_fetch_preserves_values(self):
         from bilibili_profile import refresh
         prior = json.loads((ROOT / 'data/stats.json').read_text(encoding='utf-8'))['bilibili']

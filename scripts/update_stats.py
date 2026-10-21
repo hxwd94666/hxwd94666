@@ -8,9 +8,9 @@ from urllib.parse import quote
 USER = 'hxwd94666'
 PROJECT = 'NTE-Drive-Calculator'
 
-def get(url, api=True, accept=None):
+def get(url, api=True, accept=None, authenticated=True):
     headers={'User-Agent':'WuDu-Profile','Accept':accept or ('application/vnd.github+json' if api else 'text/html')}
-    if api and os.environ.get('GH_TOKEN'):
+    if api and authenticated and os.environ.get('GH_TOKEN'):
         headers['Authorization']='Bearer '+os.environ['GH_TOKEN']
     with urlopen(Request(url,headers=headers),timeout=45) as r:
         content=r.read().decode('utf-8')
@@ -83,7 +83,7 @@ def collect(previous=None, force=False, today=None):
     if not due:
         print('All modules are fresh; no requests made')
         return data
-    # Reuse this run's live repository list, never validate new star timestamps
+    # Reuse this run's live repository list, never validate new star history
     # against a count from yesterday (or an earlier scheduled run).
     repos=None
     def live_repos():

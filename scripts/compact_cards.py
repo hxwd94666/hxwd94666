@@ -8,7 +8,7 @@ def render(data, root):
     assets = root / 'assets' / 'cards'
     assets.mkdir(parents=True, exist_ok=True)
     owned = sorted([r for r in data['repos'] if not r['fork']], key=lambda r: -r['stargazers_count'])[:2]
-    releases = sorted([r for r in data['releases'] if not r.get('draft')], key=lambda r: r['published_at'], reverse=True)
+    releases = sorted([r for r in data['releases'] if not r.get('draft')], key=lambda r: (sum(a['download_count'] for a in r['assets']), r['published_at'], r['tag_name']), reverse=True)
     for theme in ['dark', 'light']:
         dark = theme == 'dark'
         bg = '#0d1117' if dark else '#ffffff'
@@ -52,7 +52,7 @@ def render(data, root):
         content += t(12, 134, 'PUBLIC / NON-FORK', 8, muted)+t(284,134,date_label(data,'github'),8,muted,anchor='end')
         save('projects', content)
 
-        content = header('RELEASES', 'LATEST 3')
+        content = header('RELEASES', 'TOP 3 DOWNLOADS')
         content += t(12, 45, 'VERSION', 8, muted)+t(136, 45, 'DATE', 8, muted)+t(284, 45, 'DOWNLOADS', 8, muted, anchor='end')
         for i, release in enumerate(releases[:3]):
             y = 65 + i * 24
@@ -76,8 +76,8 @@ def render(data, root):
             content += f'<circle cx="{x}" cy="{y}" r="2.5" fill="{blue}"/>'
             content += t(12, 131, f'{points[0]["date"][5:]} / {values[0]}', 8, muted)+t(284, 131, f'{points[-1]["date"][5:]} / {values[-1]}', 8, muted, anchor='end')
         else:
-            content += t(12, 77, 'Star timestamps pending', 12, muted)
-        save('star-growth', content, title='Star Growth / reconstructed from currently retained stars, not historical net totals')
+            content += t(12, 77, 'Star history pending', 12, muted)
+        save('star-growth', content, title='Star Growth / reconstructed retained-star history, not historical net totals; day boundaries follow the recorded source')
 
         steam = data['steam'];accent = '#d0accb' if dark else '#a05f94'
         content = avatar('steam-avatar.jpg')+t(58, 25, 'STEAM', 10, accent, 700)+t(58, 43, steam['name'], 14, weight=600)+t(284, 25, '↗', 14, muted, anchor='end')

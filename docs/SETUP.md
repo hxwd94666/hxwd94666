@@ -47,7 +47,7 @@ Enable Actions and allow workflow write permissions. Only the built-in
   due modules. Local equivalents: `python -B scripts/update_stats.py --force`
   and `python -B scripts/update_stats.py`.
 - Star Growth shares the current run's repository list, or fetches a new list when
-  it alone needs a retry. It never validates new timestamps against cached star counts.
+  it alone needs a retry. It never validates new history against cached star counts.
   GitHub and Star Growth are separate samples, so same-day counts can differ.
 - On failure, keep that module's verified values and original data date. Record
   `refresh.<module>.status`, `attempted_at` (UTC) and `error` in `data/stats.json`
@@ -76,9 +76,19 @@ python -B -m unittest discover -s tests -p "test_profile.py" -k "render" -v
 - Community: public issues and PRs authored by this account, all-time status.
 - Languages: repository language bytes, not skill proficiency.
 - Releases / downloads: published NTE-Drive-Calculator release assets, cumulative
-  download requests rather than unique people. Only the latest three releases are listed.
-- Star Growth: reconstruction from currently retained stargazer timestamps, not a full
-  history of gained and lost stars. The 30-day value excludes removed stars.
+  download requests rather than unique people. The three releases with the most total
+  asset downloads are listed, highest first; ties use newest publication, then tag.
+- Star Growth: reconstruction from the public [`/stargazers/history` endpoint](https://docs.github.com/en/rest/activity/starring#get-repository-star-history),
+  not a full history of gained and lost stars. Individual stargazer listings are
+  restricted to repository admins/collaborators since July 2026; no extra token or
+  broader Actions permission is needed for public aggregate history.
+  Requests for this endpoint omit Authorization; other GitHub API requests retain
+  the built-in token. Each repository's aggregate total must match its live star
+  count before publishing. Failure preserves the previous series and its date.
+  `as_of` is the collection date in Asia/Shanghai, while the chart uses GitHub's
+  day buckets labelled from the API week timestamp. Those buckets are not
+  guaranteed to align with UTC or Asia/Shanghai; do not interpret them as exact
+  Beijing-time star events. Only aggregate counts, not user identities, are stored.
 - Bilibili: public followers, following, videos, likes and level, without login.
 - Steam: game count, level, badges and joined year; no playtime.
 - Bangumi: public anime collections only; completed share = completed / total.

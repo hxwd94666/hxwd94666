@@ -166,4 +166,61 @@ class RefreshTests(unittest.TestCase):
         self.assertEqual(len(state.error_reason(RuntimeError('x' * 1000))), 500)
 
 
+class StarHistoryTests(unittest.TestCase):
+    def test_public_history_pagination_and_daily_totals(self):
+        import datetime as dt
+        from star_growth import collect
+        from unittest.mock import Mock
+        newest = dt.datetime(2026, 10, 18, tzinfo=dt.timezone.utc)
+        rows = []
+        for i in range(31):
+            counts = [2, 0, 3, 0, 0, 0, 0] if i == 0 else [1, 0, 0, 0, 0, 0, 0]
+            rows.append({'week': int((newest - dt.timedelta(weeks=i)).timestamp()), 'days': counts, 'total': sum(counts)})
+        get = Mock(side_effect=[rows[:30], rows[30:], []])
+        repos = [{'name': 'repo', 'full_name': 'owner/repo', 'fork': False, 'stargazers_count': 35},
+                 {'name': 'empty', 'full_name': 'owner/empty', 'fork': False, 'stargazers_count': 0},
+                 {'name': 'fork', 'full_name': 'owner/fork', 'fork': True, 'stargazers_count': 999}]
+        actual = collect(repos, '2026-10-21', get)
+        self.assertEqual(actual['total'], 35)
+        self.assertEqual(actual['received_30d'], 8)
+        self.assertEqual(actual['points_30d'][0], {'date': '2026-09-22', 'count': 27})
+        self.assertEqual(actual['points_30d'][-1], {'date': '2026-10-21', 'count': 35})
+        self.assertEqual(len(actual['points_30d']), 30)
+        self.assertEqual(actual['daily_by_repo']['empty'], {})
+        self.assertEqual(actual['basis'], 'public_aggregate_star_history')
+        self.assertEqual(get.call_count, 3)
+        for call in get.call_args_list:
+            self.assertIn('/stargazers/history?per_page=30&page=', call.args[0])
+            self.assertEqual(call.kwargs, {'authenticated': False})
+        self.assertIn('page=2', get.call_args_list[1].args[0])
+
+    def test_invalid_or_denied_history_preserves_verified_series(self):
+        from star_growth import refresh
+        from urllib.error import HTTPError
+        from unittest.mock import Mock
+        prior = json.loads((ROOT / 'data/stats.json').read_text(encoding='utf-8'))['star_growth']
+        original = copy.deepcopy(prior)
+        valid = {'week': 1792281600, 'total': 1, 'days': [1, 0, 0, 0, 0, 0, 0]}
+        cases = [[dict(valid, days=[1])], [dict(valid, total=2)], [valid, valid],
+                 [dict(valid, total=0, days=[0]*7)], HTTPError('https://api.github.com/history', 403, 'Forbidden', {}, None)]
+        for case in cases:
+            with self.subTest(case=type(case).__name__):
+                get = Mock(side_effect=case) if isinstance(case, Exception) else Mock(return_value=case)
+                result = refresh([{'name': 'repo', 'full_name': 'owner/repo', 'fork': False, 'stargazers_count': 1}], '2026-10-21', get, prior)
+                for key, value in prior.items():self.assertEqual(result[key], value)
+                self.assertEqual(result['refresh_status'], 'stale')
+                self.assertTrue(result['refresh_error'])
+                self.assertEqual(prior, original)
+
+    def test_public_history_request_omits_authorization(self):
+        from unittest.mock import MagicMock
+        response = MagicMock()
+        response.__enter__.return_value.read.return_value = b'[]'
+        with patch.dict(os.environ, {'GH_TOKEN': 'fixture-token'}), patch.object(updater, 'urlopen', return_value=response) as open_url:
+            self.assertEqual(updater.get('https://api.github.com/history', authenticated=False), [])
+            self.assertFalse(open_url.call_args.args[0].has_header('Authorization'))
+            updater.get('https://api.github.com/repos/owner/repo')
+            self.assertEqual(open_url.call_args.args[0].get_header('Authorization'), 'Bearer fixture-token')
+
+
 if __name__ == '__main__':unittest.main()
