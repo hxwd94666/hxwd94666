@@ -1,6 +1,7 @@
 """Two rows of three independent cards, 296 x 144. Never fabricate platform stats."""
 import base64
 import html
+from refresh_state import label as date_label, description, is_stale
 
 
 def render(data, root):
@@ -23,6 +24,8 @@ def render(data, root):
             return f'<text x="{x}" y="{y}" fill="{color or fg}" font-size="{size}" font-weight="{weight}" text-anchor="{anchor}">{html.escape(str(value))}</text>'
 
         def save(name, content, gradient=None, defs='', title=None, body=None):
+            module={'projects':'github','releases':'github','star-growth':'star_growth'}.get(name,name)
+            title=(title or name)+' / '+description(data,module)
             banner = ''
             if gradient:
                 a, b = gradient
@@ -46,7 +49,7 @@ def render(data, root):
             content += t(284, y+18, repo.get('language') or '—', 9, muted, anchor='end')
             if i == 0:
                 content += f'<path d="M12 82H284" stroke="{border}"/>'
-        content += t(12, 134, 'PUBLIC / NON-FORK', 8, muted)
+        content += t(12, 134, 'PUBLIC / NON-FORK', 8, muted)+t(284,134,date_label(data,'github'),8,muted,anchor='end')
         save('projects', content)
 
         content = header('RELEASES', 'LATEST 3')
@@ -55,11 +58,11 @@ def render(data, root):
             y = 65 + i * 24
             count = sum(a['download_count'] for a in release['assets'])
             content += t(12, y, release['tag_name'], 11, purple)+t(136, y, release['published_at'][5:10], 9, muted)+t(284, y, f'{count:,}', 11, weight=600, anchor='end')
-        content += t(12, 134, 'NTE-DRIVE-CALCULATOR', 8, muted)
+        content += t(12, 134, 'NTE-DRIVE-CALCULATOR', 8, muted)+t(284,134,date_label(data,'github'),8,muted,anchor='end')
         save('releases', content)
 
         growth = data.get('star_growth')
-        content = header('STAR GROWTH', '30D / RETAINED')
+        content = header('STAR GROWTH', date_label(data,'star_growth'))
         if growth:
             content += t(12, 57, growth['total'], 23, blue, 600)+t(65, 57, 'stars', 9, muted)
             content += t(284, 55, f'+{growth["received_30d"]} / 30d', 11, green, 600, 'end')
@@ -78,7 +81,7 @@ def render(data, root):
 
         steam = data['steam'];accent = '#d0accb' if dark else '#a05f94'
         content = avatar('steam-avatar.jpg')+t(58, 25, 'STEAM', 10, accent, 700)+t(58, 43, steam['name'], 14, weight=600)+t(284, 25, '↗', 14, muted, anchor='end')
-        content += t(284, 43, 'STALE' if steam.get('refresh_status')=='stale' else steam['as_of'], 8, muted, anchor='end')
+        content += t(284, 43, date_label(data,'steam'), 8, muted, anchor='end')
         for i, (label, value) in enumerate([('GAMES',steam['games']),('LEVEL',steam['level']),('BADGES',steam['badges']),('JOINED',steam['member_since'][-4:])]):
             x = 12+i*69
             if i:
@@ -90,18 +93,19 @@ def render(data, root):
 
         bgm = data['bangumi'];counts=bgm['counts'];accent='#d6a7ff' if dark else '#8250df'
         content=avatar('bangumi-avatar.jpg')+t(58,25,'BANGUMI',10,accent,700)+t(58,43,bgm['username'],12,weight=600)
-        content+=t(284,27,f'{bgm["total"]} ANIME',13,accent,600,'end')+t(284,43,'STALE' if bgm.get('refresh_status')=='stale' else f'{counts["2"]/(bgm["total"] or 1):.0%} completed',8,muted,anchor='end')
+        content+=t(284,27,f'{bgm["total"]} ANIME',13,accent,600,'end')+t(284,43,'STALE' if is_stale(data,'bangumi') else f'{counts["2"]/(bgm["total"] or 1):.0%} completed',8,muted,anchor='end')
         xbar=12
         for i,(key,label,color) in enumerate([('2','COMPLETED','#a371f7'),('3','WATCHING','#3fb950'),('1','PLANNED','#58a6ff'),('4','ON HOLD','#d29922'),('5','DROPPED','#8b949e')]):
             x=12+i*55
             content+=t(x,91,counts[key],21,weight=600)+t(x,111,label,7,muted,600)
             width=272*counts[key]/(bgm['total'] or 1)
             content+=f'<rect x="{xbar}" y="128" width="{width}" height="4" fill="{color}"/>';xbar+=width
+        content+=t(284,141,date_label(data,'bangumi'),7,muted,anchor='end')
         save('bangumi',content,('#392d44','#201c30') if dark else ('#f0e5f5','#f7f3fc'))
 
         bili=data['bilibili'];accent='#f47ca9' if dark else '#b33c6f'
         content=avatar('bilibili-avatar.jpg')+t(58,25,'BILIBILI',10,accent,700)+t(58,43,'UID '+bili['uid'],11,weight=600)
-        content+=t(284,25,'LV.'+str(bili['level']),9,accent,600,'end')+t(284,43,bili['as_of'],8,muted,anchor='end')
+        content+=t(284,25,'LV.'+str(bili['level']),9,accent,600,'end')+t(284,43,date_label(data,'bilibili'),8,muted,anchor='end')
         for i,(label,key) in enumerate([('FOLLOWERS','followers'),('FOLLOWING','following'),('VIDEOS','videos'),('LIKES','likes')]):
             x=12+i*69;value=bili[key]
             number=f'{value:,}' if value<100000 else (f'{value/1000000:.1f}m' if value>=1000000 else f'{value/1000:.1f}k')

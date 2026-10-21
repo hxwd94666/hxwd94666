@@ -34,8 +34,10 @@ def collect():
 
 def refresh(previous,fetch=None):
     try:return (fetch or collect)()
-    except Exception:
+    except Exception as error:
         if not previous:raise
         preserved=copy.deepcopy(previous)
+        from refresh_state import error_reason
         preserved['refresh_status']='stale'
+        preserved['refresh_error']=error_reason(error)
         return preserved

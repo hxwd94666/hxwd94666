@@ -39,7 +39,8 @@ def refresh(repos, as_of, get, previous=None):
     """Keep the last verified series when GitHub temporarily rejects the API request."""
     try:
         return collect(repos, as_of, get)
-    except Exception:
+    except Exception as error:
         if previous:
-            return dict(previous, refresh_status='stale')
+            from refresh_state import error_reason
+            return dict(previous, refresh_status='stale', refresh_error=error_reason(error))
         raise

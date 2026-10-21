@@ -1,5 +1,6 @@
 """Dense public-data cards. All numbers derive from the existing snapshot."""
 import calendar, collections, datetime as dt, html
+from refresh_state import label as date_label, description
 
 def render(data,root):
     out=root/'assets'/'cards';out.mkdir(exist_ok=True,parents=True)
@@ -36,7 +37,9 @@ def render(data,root):
         def rect(x,y,w,h,fill='bg',rx=5,stroke=True):
             return f'<rect x="{x+.5}" y="{y+.5}" width="{w-1}" height="{h-1}" rx="{rx}" fill="{c.get(fill,fill)}"'+(f' stroke="{c["line"]}"' if stroke else '')+'/>'
         def svg(name,height,content,width=920):
-            s=f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title"><title id="title">{name} · public data · {data["as_of"]}</title><g font-family="Consolas,Menlo,DejaVu Sans Mono,monospace">{content}</g></svg>'
+            modules=('community','github') if name=='insights' else ('github',)
+            title=html.escape(name+' · public data · '+'; '.join(description(data,m) for m in modules))
+            s=f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title"><title id="title">{title}</title><g font-family="Consolas,Menlo,DejaVu Sans Mono,monospace">{content}</g></svg>'
             (out/f'{name}-{theme}.svg').write_text(s,encoding='utf-8')
 
         content=rect(0,0,920,40,'panel')
@@ -45,6 +48,7 @@ def render(data,root):
             x=i*920/6
             content+=t(x+10,25,label,9,'muted')+t(x+920/6-10,27,f'{n:,}',17,color,600,'end')
             if i:content+=line(x,8,x,32)
+        content+=t(10,37,date_label(data,'github'),7,'muted')
         svg('overview',40,content)
 
         content=rect(0,0,920,236)+line(562,0,562,236)+rect(0,0,562,30,'panel',5,False)+rect(563,0,357,30,'panel',5,False)
@@ -66,10 +70,12 @@ def render(data,root):
             y=66+i*16
             if i%2==0:content+=rect(570,y-11,343,16,'panel',0,False)
             content+=t(576,y,calendar.month_abbr[i+1],11,'muted')+t(706,y,f'{n:,}',11,'text',500,'end')+t(795,y,month_days[i],11,'muted',anchor='end')+t(905,y,f'{n/(total or 1)*100:.1f}%',11,'blue',anchor='end')
+        content+=t(13,231,date_label(data,'github'),8,'muted')
         svg('activity',236,content)
 
         content=rect(0,0,452,180)+rect(468,0,452,180)+rect(0,0,452,29,'panel',5,False)+rect(468,0,452,29,'panel',5,False)
         content+=t(13,20,'COMMUNITY / AUTHORED',11,'text',600)+t(481,20,'LANGUAGES / ORIGINAL REPOS',11,'text',600)
+        content+=t(439,20,date_label(data,'community'),8,'muted',anchor='end')+t(905,20,date_label(data,'github'),8,'muted',anchor='end')
         issues=community.get('issues_open',0)+community.get('issues_closed',0)
         prs=sum(community.get(k,0) for k in ['prs_open','prs_merged','prs_closed_unmerged'])
         for y,label,total_n,segments in [(49,'Issues',issues,[(community.get('issues_open',0),'Open','green'),(community.get('issues_closed',0),'Closed','violet')]),(112,'Pull requests',prs,[(community.get('prs_open',0),'Open','green'),(community.get('prs_merged',0),'Merged','violet'),(community.get('prs_closed_unmerged',0),'Closed','#f85149')])]:

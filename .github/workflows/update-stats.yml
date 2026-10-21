@@ -1,10 +1,14 @@
 name: Refresh profile stats
 on:
   workflow_dispatch:
+    inputs:
+      force:
+        description: Refresh all modules, including those already fresh today
+        type: boolean
+        default: true
   schedule:
     # UTC 01/07/13/19:19 = Asia/Shanghai 09/15/21 and next-day 03:19.
-    # Each run is skipped when data/stats.json already carries today's date,
-    # so a skipped or failed scheduled run is retried six hours later.
+    # Skip only when every module is fresh; failed modules retry six hours later.
     - cron: '19 1,7,13,19 * * *'
 permissions:
   contents: write
@@ -14,24 +18,33 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
+    env:
+      FORCE_REFRESH: ${{ github.event_name == 'workflow_dispatch' && inputs.force && 'true' || 'false' }}
     steps:
       - uses: actions/checkout@v4
-      - name: Check whether already refreshed today
+      - name: Check module freshness
         id: check
         run: |
-          if python3 -B scripts/check_fresh_today.py; then
+          args=()
+          if [ "$FORCE_REFRESH" = true ]; then args+=(--force); fi
+          if python3 -B scripts/check_fresh_today.py "${args[@]}"; then
             echo "need_refresh=false" >> "$GITHUB_OUTPUT"
           else
             echo "need_refresh=true" >> "$GITHUB_OUTPUT"
           fi
       - name: Run offline regression tests
         if: steps.check.outputs.need_refresh == 'true'
-        run: python3 -B -m unittest discover -s tests -v
+        run: |
+          python3 -B -m unittest discover -s tests -p "test_refresh.py" -v
+          python3 -B -m unittest discover -s tests -p "test_profile.py" -k "render" -v
       - name: Generate public-data cards
         if: steps.check.outputs.need_refresh == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python3 -B scripts/update_stats.py
+        run: |
+          args=()
+          if [ "$FORCE_REFRESH" = true ]; then args+=(--force); fi
+          python3 -B scripts/update_stats.py "${args[@]}"
       - name: Commit generated cards
         if: steps.check.outputs.need_refresh == 'true'
         run: |

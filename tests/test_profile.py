@@ -53,7 +53,7 @@ class ProfileTests(unittest.TestCase):
         prior = json.loads((ROOT / 'data/stats.json').read_text(encoding='utf-8'))['bilibili']
         def failed(): raise RuntimeError('offline fixture')
         actual = refresh(prior, fetch=failed)
-        self.assertEqual(actual, dict(prior, refresh_status='stale'))
+        self.assertEqual(actual, dict(prior, refresh_status='stale', refresh_error='RuntimeError: offline fixture'))
         self.assertNotIn('refresh_status', prior)
 
     def test_failed_star_growth_fetch_preserves_values(self):
@@ -62,6 +62,6 @@ class ProfileTests(unittest.TestCase):
         def failed(*args, **kwargs): raise RuntimeError('API rate limit fixture')
         repos = [{'full_name': 'owner/repo', 'name': 'repo', 'fork': False, 'stargazers_count': 1}]
         actual = refresh(repos, '2026-10-19', failed, previous=prior)
-        self.assertEqual(actual, dict(prior, refresh_status='stale'))
+        self.assertEqual(actual, dict(prior, refresh_status='stale', refresh_error='RuntimeError: API rate limit fixture'))
 
 if __name__ == '__main__': unittest.main()

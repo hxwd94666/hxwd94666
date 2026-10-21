@@ -1,24 +1,24 @@
-"""Exit 0 when data/stats.json already carries today's (Asia/Shanghai) date.
-
-Used by update-stats.yml so the schedule can retry every six hours while still
-producing at most one successful refresh per day.
-"""
-import datetime as dt
+"""Exit 0 only when every required module is fresh for today (Asia/Shanghai)."""
+import argparse
 import json
-import pathlib
-import sys
+from pathlib import Path
+from refresh_state import due_modules, today_local
 
-today = dt.datetime.now(dt.timezone(dt.timedelta(hours=8))).date().isoformat()
-stats = pathlib.Path(__file__).resolve().parents[1] / "data" / "stats.json"
 
-stamp = ""
-if stats.exists():
+def main():
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--root',type=Path,default=Path(__file__).resolve().parents[1])
+    parser.add_argument('--force',action='store_true')
+    args=parser.parse_args()
     try:
-        data = json.loads(stats.read_text(encoding="utf-8"))
-        stamp = str(data.get("as_of") or data.get("community_as_of") or "")
-    except Exception:
-        stamp = ""
+        data=json.loads((args.root/'data/stats.json').read_text(encoding='utf-8'))
+    except (OSError,ValueError):
+        data={}
+    today=today_local()
+    due=due_modules(data,today,args.force)
+    print(f'today={today} due={",".join(due) or "none"} fresh={not due} force={args.force}')
+    return 1 if due else 0
 
-fresh = stamp == today
-print(f"today={today} as_of={stamp} fresh={fresh}")
-sys.exit(0 if fresh else 1)
+
+if __name__=='__main__':
+    raise SystemExit(main())

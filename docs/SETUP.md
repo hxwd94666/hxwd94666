@@ -32,11 +32,40 @@ Create the public profile repository `hxwd94666/hxwd94666`, then upload this
 directory's contents (including `.github`). No Git repository has been created
 or uploaded by this local cleanup.
 
-The workflow is configured for 01:19 UTC / 09:19 Beijing daily and manual dispatch.
-Enable Actions, allow workflow write permissions, and manually run **Refresh profile stats**
-once to verify the hosted environment. Schedules can be delayed by GitHub.
-Only the built-in `GITHUB_TOKEN` is used; never upload login cookies or personal credentials.
-Local rendering has been verified; the hosted collection workflow has not run yet.
+The workflow runs at UTC 01:19 / 07:19 / 13:19 / 19:19 (Beijing 09:19 /
+15:19 / 21:19 / next-day 03:19). GitHub may delay scheduled runs.
+Enable Actions and allow workflow write permissions. Only the built-in
+`GITHUB_TOKEN` is used; never upload login cookies or personal credentials.
+
+## Refresh behavior
+
+- Freshness is checked separately for GitHub statistics, community, Star Growth,
+  Steam, Bangumi and Bilibili, using each module's own data date (Asia/Shanghai).
+  Scheduled runs fetch only missing, older or failed modules; all fresh means no requests.
+- Run **Actions → Refresh profile stats → Run workflow** with **force** checked
+  (default) to refresh every module even on the same day. Uncheck it to retry only
+  due modules. Local equivalents: `python -B scripts/update_stats.py --force`
+  and `python -B scripts/update_stats.py`.
+- Star Growth shares the current run's repository list, or fetches a new list when
+  it alone needs a retry. It never validates new timestamps against cached star counts.
+  GitHub and Star Growth are separate samples, so same-day counts can differ.
+- On failure, keep that module's verified values and original data date. Record
+  `refresh.<module>.status`, `attempted_at` (UTC) and `error` in `data/stats.json`
+  and print the reason in the Actions log; known bearer tokens are redacted.
+  Other modules continue. A usable partial refresh can finish successfully: check
+  the per-module status, not just the workflow's green checkmark.
+- Cards display **AS OF YYYY-MM-DD**, or **STALE / YYYY-MM-DD** after a failed
+  refresh. SVG titles include the recorded reason. A successful retry clears the
+  old error. No baseline on first collection means generation stops rather than
+  inventing values.
+- `--snapshot` is offline rendering only: it neither fetches nor changes data dates.
+
+Related checks (no network):
+
+```sh
+python -B -m unittest discover -s tests -p "test_refresh.py" -v
+python -B -m unittest discover -s tests -p "test_profile.py" -k "render" -v
+```
 
 ## Data definitions
 
@@ -53,8 +82,9 @@ Local rendering has been verified; the hosted collection workflow has not run ye
 - Bilibili: public followers, following, videos, likes and level, without login.
 - Steam: game count, level, badges and joined year; no playtime.
 - Bangumi: public anime collections only; completed share = completed / total.
-- Steam / Bangumi / Bilibili collection failures preserve previous values and dates,
-  with `refresh_status: stale` in the snapshot. API changes and rate limits may affect refresh.
+- Collection failures preserve previous values and dates with per-module stale status.
+  Existing `refresh_status: stale` flags are also recognized. API changes and rate limits
+  may affect refresh.
 - Avatars are cached assets; the daily workflow does not refresh them.
 - Steam and Bilibili bottom stripes are decorative, not proportions.
 
