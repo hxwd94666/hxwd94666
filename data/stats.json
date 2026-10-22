@@ -30,7 +30,7 @@
     "prs_merged": 11,
     "prs_closed_unmerged": 2
   },
-  "community_as_of": "2026-10-22",
+  "community_as_of": "2026-10-23",
   "steam": {
     "id": "76561198402274250",
     "url": "https://steamcommunity.com/profiles/76561198402274250/",
@@ -38,7 +38,7 @@
     "state": "offline",
     "member_since": "July 6, 2017",
     "privacy": "public",
-    "as_of": "2026-10-22",
+    "as_of": "2026-10-23",
     "level": 18,
     "games": 107,
     "badges": 13
@@ -46,7 +46,7 @@
   "bangumi": {
     "username": "hxwd94666",
     "url": "https://bgm.tv/user/hxwd94666",
-    "as_of": "2026-10-22",
+    "as_of": "2026-10-23",
     "subject_type": 2,
     "counts": {
       "1": 4,
@@ -62,16 +62,16 @@
     "url": "https://space.bilibili.com/436632831",
     "name": "\u98de\u884c\u5e93\u51af",
     "avatar_url": "https://i0.hdslb.com/bfs/face/21e43b46de5baef42ee4b65a032e4895bae5da7b.jpg",
-    "as_of": "2026-10-22",
+    "as_of": "2026-10-23",
     "source": "anonymous_public_api",
     "followers": 1114,
     "following": 39,
     "videos": 30,
-    "likes": 21946,
+    "likes": 21962,
     "level": 6
   },
   "star_growth": {
-    "as_of": "2026-10-22",
+    "as_of": "2026-10-23",
     "timezone": "GitHub-defined day buckets",
     "basis": "public_aggregate_star_history",
     "daily_by_repo": {
@@ -79,7 +79,7 @@
       "NTE-Drive-Calculator": {
         "2026-10-18": 2,
         "2026-10-20": 3,
-        "2026-10-21": 1,
+        "2026-10-21": 2,
         "2026-10-11": 1,
         "2026-10-12": 1,
         "2026-10-13": 1,
@@ -193,13 +193,9 @@
         "2026-10-21": 1
       }
     },
-    "total": 331,
-    "received_30d": 37,
+    "total": 332,
+    "received_30d": 36,
     "points_30d": [
-      {
-        "date": "2026-09-23",
-        "count": 296
-      },
       {
         "date": "2026-09-24",
         "count": 297
@@ -310,11 +306,15 @@
       },
       {
         "date": "2026-10-21",
-        "count": 331
+        "count": 332
       },
       {
         "date": "2026-10-22",
-        "count": 331
+        "count": 332
+      },
+      {
+        "date": "2026-10-23",
+        "count": 332
       }
     ]
   },
@@ -322,7 +322,7 @@
     "afdian": "https://afdian.com/a/hxwd94666"
   },
   "username": "hxwd94666",
-  "as_of": "2026-10-22",
+  "as_of": "2026-10-23",
   "repos": [
     {
       "name": "Dumper-7",
@@ -361,7 +361,7 @@
       "name": "NTE-Drive-Calculator",
       "full_name": "hxwd94666/NTE-Drive-Calculator",
       "fork": false,
-      "stargazers_count": 326,
+      "stargazers_count": 327,
       "forks_count": 22,
       "language": "Python",
       "html_url": "https://github.com/hxwd94666/NTE-Drive-Calculator",
@@ -444,7 +444,7 @@
       "assets": [
         {
           "name": "NTE_Drive_Calc_Setup_2.3.1.exe",
-          "download_count": 1207
+          "download_count": 1254
         }
       ]
     },
@@ -2140,32 +2140,37 @@
       "date": "2026-10-22",
       "level": 0,
       "count": 0
+    },
+    {
+      "date": "2026-10-23",
+      "level": 0,
+      "count": 0
     }
   ],
   "refresh": {
     "github": {
       "status": "fresh",
-      "attempted_at": "2026-10-21T18:06:00+00:00"
+      "attempted_at": "2026-10-22T18:01:12+00:00"
     },
     "community": {
       "status": "fresh",
-      "attempted_at": "2026-10-21T18:06:04+00:00"
+      "attempted_at": "2026-10-22T18:01:15+00:00"
     },
     "star_growth": {
       "status": "fresh",
-      "attempted_at": "2026-10-21T18:06:07+00:00"
+      "attempted_at": "2026-10-22T18:01:17+00:00"
     },
     "steam": {
       "status": "fresh",
-      "attempted_at": "2026-10-21T18:06:08+00:00"
+      "attempted_at": "2026-10-22T18:01:18+00:00"
     },
     "bangumi": {
       "status": "fresh",
-      "attempted_at": "2026-10-21T18:06:09+00:00"
+      "attempted_at": "2026-10-22T18:01:18+00:00"
     },
     "bilibili": {
       "status": "fresh",
-      "attempted_at": "2026-10-21T18:06:11+00:00"
+      "attempted_at": "2026-10-22T18:01:22+00:00"
     }
   }
 }
