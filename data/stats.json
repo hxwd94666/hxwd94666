@@ -30,7 +30,7 @@
     "prs_merged": 11,
     "prs_closed_unmerged": 3
   },
-  "community_as_of": "2026-10-25",
+  "community_as_of": "2026-10-26",
   "steam": {
     "id": "76561198402274250",
     "url": "https://steamcommunity.com/profiles/76561198402274250/",
@@ -38,7 +38,7 @@
     "state": "offline",
     "member_since": "July 6, 2017",
     "privacy": "public",
-    "as_of": "2026-10-25",
+    "as_of": "2026-10-26",
     "level": 18,
     "games": 107,
     "badges": 13
@@ -46,7 +46,7 @@
   "bangumi": {
     "username": "hxwd94666",
     "url": "https://bgm.tv/user/hxwd94666",
-    "as_of": "2026-10-25",
+    "as_of": "2026-10-26",
     "subject_type": 2,
     "counts": {
       "1": 4,
@@ -62,16 +62,16 @@
     "url": "https://space.bilibili.com/436632831",
     "name": "\u98de\u884c\u5e93\u51af",
     "avatar_url": "https://i0.hdslb.com/bfs/face/21e43b46de5baef42ee4b65a032e4895bae5da7b.jpg",
-    "as_of": "2026-10-25",
+    "as_of": "2026-10-26",
     "source": "anonymous_public_api",
-    "followers": 1113,
+    "followers": 1114,
     "following": 39,
     "videos": 30,
-    "likes": 21978,
+    "likes": 21987,
     "level": 6
   },
   "star_growth": {
-    "as_of": "2026-10-25",
+    "as_of": "2026-10-26",
     "timezone": "GitHub-defined day buckets",
     "basis": "public_aggregate_star_history",
     "daily_by_repo": {
@@ -197,12 +197,8 @@
       }
     },
     "total": 337,
-    "received_30d": 40,
+    "received_30d": 38,
     "points_30d": [
-      {
-        "date": "2026-09-26",
-        "count": 299
-      },
       {
         "date": "2026-09-27",
         "count": 304
@@ -318,6 +314,10 @@
       {
         "date": "2026-10-25",
         "count": 337
+      },
+      {
+        "date": "2026-10-26",
+        "count": 337
       }
     ]
   },
@@ -325,7 +325,7 @@
     "afdian": "https://afdian.com/a/hxwd94666"
   },
   "username": "hxwd94666",
-  "as_of": "2026-10-25",
+  "as_of": "2026-10-26",
   "repos": [
     {
       "name": "Dumper-7",
@@ -480,7 +480,7 @@
       "assets": [
         {
           "name": "NTE_Drive_Calc_Setup_2.3.1.exe",
-          "download_count": 1336
+          "download_count": 1380
         }
       ]
     },
@@ -492,7 +492,7 @@
       "assets": [
         {
           "name": "NTE_Drive_Calc_Setup_2.3.0.exe",
-          "download_count": 1521
+          "download_count": 1527
         }
       ]
     },
@@ -2191,32 +2191,37 @@
       "date": "2026-10-25",
       "level": 0,
       "count": 0
+    },
+    {
+      "date": "2026-10-26",
+      "level": 0,
+      "count": 0
     }
   ],
   "refresh": {
     "github": {
       "status": "fresh",
-      "attempted_at": "2026-10-24T16:38:28+00:00"
+      "attempted_at": "2026-10-25T17:04:38+00:00"
     },
     "community": {
       "status": "fresh",
-      "attempted_at": "2026-10-24T16:38:31+00:00"
+      "attempted_at": "2026-10-25T17:04:41+00:00"
     },
     "star_growth": {
       "status": "fresh",
-      "attempted_at": "2026-10-24T16:38:33+00:00"
+      "attempted_at": "2026-10-25T17:04:44+00:00"
     },
     "steam": {
       "status": "fresh",
-      "attempted_at": "2026-10-24T16:38:34+00:00"
+      "attempted_at": "2026-10-25T17:04:44+00:00"
     },
     "bangumi": {
       "status": "fresh",
-      "attempted_at": "2026-10-24T16:38:35+00:00"
+      "attempted_at": "2026-10-25T17:04:45+00:00"
     },
     "bilibili": {
       "status": "fresh",
-      "attempted_at": "2026-10-24T16:38:36+00:00"
+      "attempted_at": "2026-10-25T17:04:46+00:00"
     }
   }
 }
