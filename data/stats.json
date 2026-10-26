@@ -30,7 +30,7 @@
     "prs_merged": 11,
     "prs_closed_unmerged": 3
   },
-  "community_as_of": "2026-10-26",
+  "community_as_of": "2026-10-27",
   "steam": {
     "id": "76561198402274250",
     "url": "https://steamcommunity.com/profiles/76561198402274250/",
@@ -38,7 +38,7 @@
     "state": "offline",
     "member_since": "July 6, 2017",
     "privacy": "public",
-    "as_of": "2026-10-26",
+    "as_of": "2026-10-27",
     "level": 18,
     "games": 107,
     "badges": 13
@@ -46,7 +46,7 @@
   "bangumi": {
     "username": "hxwd94666",
     "url": "https://bgm.tv/user/hxwd94666",
-    "as_of": "2026-10-26",
+    "as_of": "2026-10-27",
     "subject_type": 2,
     "counts": {
       "1": 4,
@@ -62,21 +62,23 @@
     "url": "https://space.bilibili.com/436632831",
     "name": "\u98de\u884c\u5e93\u51af",
     "avatar_url": "https://i0.hdslb.com/bfs/face/21e43b46de5baef42ee4b65a032e4895bae5da7b.jpg",
-    "as_of": "2026-10-26",
+    "as_of": "2026-10-27",
     "source": "anonymous_public_api",
-    "followers": 1114,
+    "followers": 1116,
     "following": 39,
     "videos": 30,
-    "likes": 21987,
+    "likes": 21990,
     "level": 6
   },
   "star_growth": {
-    "as_of": "2026-10-26",
+    "as_of": "2026-10-27",
     "timezone": "GitHub-defined day buckets",
     "basis": "public_aggregate_star_history",
     "daily_by_repo": {
       "hxwd94666": {},
       "NTE-Drive-Calculator": {
+        "2026-10-25": 2,
+        "2026-10-26": 1,
         "2026-10-18": 2,
         "2026-10-20": 3,
         "2026-10-21": 2,
@@ -196,13 +198,9 @@
         "2026-10-21": 1
       }
     },
-    "total": 337,
-    "received_30d": 38,
+    "total": 340,
+    "received_30d": 36,
     "points_30d": [
-      {
-        "date": "2026-09-27",
-        "count": 304
-      },
       {
         "date": "2026-09-28",
         "count": 306
@@ -313,11 +311,15 @@
       },
       {
         "date": "2026-10-25",
-        "count": 337
+        "count": 339
       },
       {
         "date": "2026-10-26",
-        "count": 337
+        "count": 340
+      },
+      {
+        "date": "2026-10-27",
+        "count": 340
       }
     ]
   },
@@ -325,7 +327,7 @@
     "afdian": "https://afdian.com/a/hxwd94666"
   },
   "username": "hxwd94666",
-  "as_of": "2026-10-26",
+  "as_of": "2026-10-27",
   "repos": [
     {
       "name": "Dumper-7",
@@ -364,7 +366,7 @@
       "name": "NTE-Drive-Calculator",
       "full_name": "hxwd94666/NTE-Drive-Calculator",
       "fork": false,
-      "stargazers_count": 332,
+      "stargazers_count": 335,
       "forks_count": 21,
       "language": "Python",
       "html_url": "https://github.com/hxwd94666/NTE-Drive-Calculator",
@@ -480,7 +482,7 @@
       "assets": [
         {
           "name": "NTE_Drive_Calc_Setup_2.3.1.exe",
-          "download_count": 1380
+          "download_count": 1412
         }
       ]
     },
@@ -492,7 +494,7 @@
       "assets": [
         {
           "name": "NTE_Drive_Calc_Setup_2.3.0.exe",
-          "download_count": 1527
+          "download_count": 1529
         }
       ]
     },
@@ -504,7 +506,7 @@
       "assets": [
         {
           "name": "NTE_Drive_Calc_Setup_2.2.1.exe",
-          "download_count": 724
+          "download_count": 726
         }
       ]
     },
@@ -2196,32 +2198,37 @@
       "date": "2026-10-26",
       "level": 0,
       "count": 0
+    },
+    {
+      "date": "2026-10-27",
+      "level": 0,
+      "count": 0
     }
   ],
   "refresh": {
     "github": {
       "status": "fresh",
-      "attempted_at": "2026-10-25T17:04:38+00:00"
+      "attempted_at": "2026-10-26T23:09:41+00:00"
     },
     "community": {
       "status": "fresh",
-      "attempted_at": "2026-10-25T17:04:41+00:00"
+      "attempted_at": "2026-10-26T23:09:45+00:00"
     },
     "star_growth": {
       "status": "fresh",
-      "attempted_at": "2026-10-25T17:04:44+00:00"
+      "attempted_at": "2026-10-26T23:09:47+00:00"
     },
     "steam": {
       "status": "fresh",
-      "attempted_at": "2026-10-25T17:04:44+00:00"
+      "attempted_at": "2026-10-26T23:09:48+00:00"
     },
     "bangumi": {
       "status": "fresh",
-      "attempted_at": "2026-10-25T17:04:45+00:00"
+      "attempted_at": "2026-10-26T23:09:49+00:00"
     },
     "bilibili": {
       "status": "fresh",
-      "attempted_at": "2026-10-25T17:04:46+00:00"
+      "attempted_at": "2026-10-26T23:09:50+00:00"
     }
   }
 }
