@@ -30,7 +30,7 @@
     "prs_merged": 11,
     "prs_closed_unmerged": 3
   },
-  "community_as_of": "2026-11-01",
+  "community_as_of": "2026-11-02",
   "steam": {
     "id": "76561198402274250",
     "url": "https://steamcommunity.com/profiles/76561198402274250/",
@@ -38,7 +38,7 @@
     "state": "offline",
     "member_since": "July 6, 2017",
     "privacy": "public",
-    "as_of": "2026-11-01",
+    "as_of": "2026-11-02",
     "level": 18,
     "games": 107,
     "badges": 13
@@ -46,7 +46,7 @@
   "bangumi": {
     "username": "hxwd94666",
     "url": "https://bgm.tv/user/hxwd94666",
-    "as_of": "2026-11-01",
+    "as_of": "2026-11-02",
     "subject_type": 2,
     "counts": {
       "1": 4,
@@ -62,16 +62,16 @@
     "url": "https://space.bilibili.com/436632831",
     "name": "\u98de\u884c\u5e93\u51af",
     "avatar_url": "https://i0.hdslb.com/bfs/face/21e43b46de5baef42ee4b65a032e4895bae5da7b.jpg",
-    "as_of": "2026-11-01",
+    "as_of": "2026-11-02",
     "source": "anonymous_public_api",
-    "followers": 1117,
+    "followers": 1119,
     "following": 39,
     "videos": 31,
-    "likes": 22024,
+    "likes": 22025,
     "level": 6
   },
   "star_growth": {
-    "as_of": "2026-11-01",
+    "as_of": "2026-11-02",
     "timezone": "GitHub-defined day buckets",
     "basis": "public_aggregate_star_history",
     "daily_by_repo": {
@@ -81,6 +81,7 @@
         "2026-10-26": 2,
         "2026-10-28": 1,
         "2026-10-30": 2,
+        "2026-10-31": 1,
         "2026-10-18": 2,
         "2026-10-20": 3,
         "2026-10-21": 2,
@@ -200,13 +201,9 @@
         "2026-10-21": 1
       }
     },
-    "total": 344,
+    "total": 345,
     "received_30d": 35,
     "points_30d": [
-      {
-        "date": "2026-10-03",
-        "count": 310
-      },
       {
         "date": "2026-10-04",
         "count": 310
@@ -317,11 +314,15 @@
       },
       {
         "date": "2026-10-31",
-        "count": 344
+        "count": 345
       },
       {
         "date": "2026-11-01",
-        "count": 344
+        "count": 345
+      },
+      {
+        "date": "2026-11-02",
+        "count": 345
       }
     ]
   },
@@ -329,7 +330,7 @@
     "afdian": "https://afdian.com/a/hxwd94666"
   },
   "username": "hxwd94666",
-  "as_of": "2026-11-01",
+  "as_of": "2026-11-02",
   "repos": [
     {
       "name": "Dumper-7",
@@ -368,7 +369,7 @@
       "name": "NTE-Drive-Calculator",
       "full_name": "hxwd94666/NTE-Drive-Calculator",
       "fork": false,
-      "stargazers_count": 339,
+      "stargazers_count": 340,
       "forks_count": 19,
       "language": "Python",
       "html_url": "https://github.com/hxwd94666/NTE-Drive-Calculator",
@@ -484,7 +485,7 @@
       "assets": [
         {
           "name": "NTE_Drive_Calc_Setup_2.3.1.exe",
-          "download_count": 1595
+          "download_count": 1658
         }
       ]
     },
@@ -604,7 +605,7 @@
       "assets": [
         {
           "name": "NTE_Drive_Calc_Setup_1.2.2.exe",
-          "download_count": 705
+          "download_count": 706
         }
       ]
     },
@@ -2230,32 +2231,37 @@
       "date": "2026-11-01",
       "level": 0,
       "count": 0
+    },
+    {
+      "date": "2026-11-02",
+      "level": 0,
+      "count": 0
     }
   ],
   "refresh": {
     "github": {
       "status": "fresh",
-      "attempted_at": "2026-10-31T22:31:16+00:00"
+      "attempted_at": "2026-11-01T18:26:43+00:00"
     },
     "community": {
       "status": "fresh",
-      "attempted_at": "2026-10-31T22:31:19+00:00"
+      "attempted_at": "2026-11-01T18:26:46+00:00"
     },
     "star_growth": {
       "status": "fresh",
-      "attempted_at": "2026-10-31T22:31:21+00:00"
+      "attempted_at": "2026-11-01T18:26:48+00:00"
     },
     "steam": {
       "status": "fresh",
-      "attempted_at": "2026-10-31T22:31:22+00:00"
+      "attempted_at": "2026-11-01T18:26:49+00:00"
     },
     "bangumi": {
       "status": "fresh",
-      "attempted_at": "2026-10-31T22:31:22+00:00"
+      "attempted_at": "2026-11-01T18:26:49+00:00"
     },
     "bilibili": {
       "status": "fresh",
-      "attempted_at": "2026-10-31T22:31:23+00:00"
+      "attempted_at": "2026-11-01T18:26:51+00:00"
     }
   }
 }
