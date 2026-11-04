@@ -3,7 +3,7 @@
     "created_at": "2022-08-16T01:30:15Z",
     "followers": 1,
     "following": 2,
-    "public_repos": 13,
+    "public_repos": 14,
     "public_gists": 0
   },
   "languages_by_repo": {
@@ -30,7 +30,7 @@
     "prs_merged": 11,
     "prs_closed_unmerged": 3
   },
-  "community_as_of": "2026-11-04",
+  "community_as_of": "2026-11-05",
   "steam": {
     "id": "76561198402274250",
     "url": "https://steamcommunity.com/profiles/76561198402274250/",
@@ -38,7 +38,7 @@
     "state": "offline",
     "member_since": "July 6, 2017",
     "privacy": "public",
-    "as_of": "2026-11-04",
+    "as_of": "2026-11-05",
     "level": 18,
     "games": 107,
     "badges": 13
@@ -46,7 +46,7 @@
   "bangumi": {
     "username": "hxwd94666",
     "url": "https://bgm.tv/user/hxwd94666",
-    "as_of": "2026-11-04",
+    "as_of": "2026-11-05",
     "subject_type": 2,
     "counts": {
       "1": 4,
@@ -62,16 +62,16 @@
     "url": "https://space.bilibili.com/436632831",
     "name": "\u98de\u884c\u5e93\u51af",
     "avatar_url": "https://i0.hdslb.com/bfs/face/21e43b46de5baef42ee4b65a032e4895bae5da7b.jpg",
-    "as_of": "2026-11-04",
+    "as_of": "2026-11-05",
     "source": "anonymous_public_api",
-    "followers": 1117,
+    "followers": 1118,
     "following": 40,
     "videos": 31,
-    "likes": 22030,
+    "likes": 22033,
     "level": 6
   },
   "star_growth": {
-    "as_of": "2026-11-04",
+    "as_of": "2026-11-05",
     "timezone": "GitHub-defined day buckets",
     "basis": "public_aggregate_star_history",
     "daily_by_repo": {
@@ -205,10 +205,6 @@
     "received_30d": 37,
     "points_30d": [
       {
-        "date": "2026-10-06",
-        "count": 309
-      },
-      {
         "date": "2026-10-07",
         "count": 309
       },
@@ -323,6 +319,10 @@
       {
         "date": "2026-11-04",
         "count": 346
+      },
+      {
+        "date": "2026-11-05",
+        "count": 346
       }
     ]
   },
@@ -330,8 +330,19 @@
     "afdian": "https://afdian.com/a/hxwd94666"
   },
   "username": "hxwd94666",
-  "as_of": "2026-11-04",
+  "as_of": "2026-11-05",
   "repos": [
+    {
+      "name": "AutoTappo",
+      "full_name": "hxwd94666/AutoTappo",
+      "fork": true,
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "language": null,
+      "html_url": "https://github.com/hxwd94666/AutoTappo",
+      "open_issues_count": 0,
+      "license_spdx": null
+    },
     {
       "name": "Dumper-7",
       "full_name": "hxwd94666/Dumper-7",
@@ -485,7 +496,7 @@
       "assets": [
         {
           "name": "NTE_Drive_Calc_Setup_2.3.1.exe",
-          "download_count": 1700
+          "download_count": 1719
         }
       ]
     },
@@ -2245,33 +2256,38 @@
     {
       "date": "2026-11-04",
       "level": 1,
-      "count": 1
+      "count": 2
+    },
+    {
+      "date": "2026-11-05",
+      "level": 0,
+      "count": 0
     }
   ],
   "refresh": {
     "github": {
       "status": "fresh",
-      "attempted_at": "2026-11-03T20:08:32+00:00"
+      "attempted_at": "2026-11-04T20:26:45+00:00"
     },
     "community": {
       "status": "fresh",
-      "attempted_at": "2026-11-03T20:08:35+00:00"
+      "attempted_at": "2026-11-04T20:26:47+00:00"
     },
     "star_growth": {
       "status": "fresh",
-      "attempted_at": "2026-11-03T20:08:38+00:00"
+      "attempted_at": "2026-11-04T20:26:49+00:00"
     },
     "steam": {
       "status": "fresh",
-      "attempted_at": "2026-11-03T20:08:38+00:00"
+      "attempted_at": "2026-11-04T20:26:50+00:00"
     },
     "bangumi": {
       "status": "fresh",
-      "attempted_at": "2026-11-03T20:08:39+00:00"
+      "attempted_at": "2026-11-04T20:26:50+00:00"
     },
     "bilibili": {
       "status": "fresh",
-      "attempted_at": "2026-11-03T20:08:40+00:00"
+      "attempted_at": "2026-11-04T20:27:01+00:00"
     }
   }
 }
