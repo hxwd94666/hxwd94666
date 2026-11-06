@@ -3,10 +3,17 @@
     "created_at": "2022-08-16T01:30:15Z",
     "followers": 1,
     "following": 2,
-    "public_repos": 14,
+    "public_repos": 12,
     "public_gists": 0
   },
   "languages_by_repo": {
+    "AutoTappo": {
+      "Rust": 199244,
+      "JavaScript": 59858,
+      "CSS": 10896,
+      "HTML": 8444,
+      "NSIS": 539
+    },
     "hxwd94666": {
       "Python": 55817,
       "HTML": 4609
@@ -30,7 +37,7 @@
     "prs_merged": 11,
     "prs_closed_unmerged": 3
   },
-  "community_as_of": "2026-11-06",
+  "community_as_of": "2026-11-07",
   "steam": {
     "id": "76561198402274250",
     "url": "https://steamcommunity.com/profiles/76561198402274250/",
@@ -38,7 +45,7 @@
     "state": "offline",
     "member_since": "July 6, 2017",
     "privacy": "public",
-    "as_of": "2026-11-06",
+    "as_of": "2026-11-07",
     "level": 18,
     "games": 107,
     "badges": 13
@@ -46,7 +53,7 @@
   "bangumi": {
     "username": "hxwd94666",
     "url": "https://bgm.tv/user/hxwd94666",
-    "as_of": "2026-11-06",
+    "as_of": "2026-11-07",
     "subject_type": 2,
     "counts": {
       "1": 4,
@@ -62,24 +69,27 @@
     "url": "https://space.bilibili.com/436632831",
     "name": "\u98de\u884c\u5e93\u51af",
     "avatar_url": "https://i0.hdslb.com/bfs/face/21e43b46de5baef42ee4b65a032e4895bae5da7b.jpg",
-    "as_of": "2026-11-06",
+    "as_of": "2026-11-07",
     "source": "anonymous_public_api",
-    "followers": 1121,
+    "followers": 1122,
     "following": 40,
     "videos": 31,
-    "likes": 22035,
+    "likes": 22042,
     "level": 6
   },
   "star_growth": {
-    "as_of": "2026-11-06",
+    "as_of": "2026-11-07",
     "timezone": "GitHub-defined day buckets",
     "basis": "public_aggregate_star_history",
     "daily_by_repo": {
+      "AutoTappo": {
+        "2026-11-06": 1
+      },
       "hxwd94666": {},
       "NTE-Drive-Calculator": {
         "2026-11-02": 3,
         "2026-11-04": 1,
-        "2026-11-05": 2,
+        "2026-11-05": 3,
         "2026-10-25": 2,
         "2026-10-26": 2,
         "2026-10-28": 1,
@@ -180,7 +190,7 @@
         "2026-07-02": 4,
         "2026-07-03": 1,
         "2026-07-04": 2,
-        "2026-06-21": 6,
+        "2026-06-21": 5,
         "2026-06-22": 3,
         "2026-06-23": 2,
         "2026-06-24": 2,
@@ -192,7 +202,7 @@
         "2026-06-16": 5,
         "2026-06-17": 1,
         "2026-06-18": 2,
-        "2026-06-19": 2,
+        "2026-06-19": 1,
         "2026-06-20": 8,
         "2026-06-13": 17
       },
@@ -204,126 +214,126 @@
       }
     },
     "total": 349,
-    "received_30d": 40,
+    "received_30d": 42,
     "points_30d": [
       {
-        "date": "2026-10-08",
-        "count": 309
-      },
-      {
         "date": "2026-10-09",
-        "count": 309
+        "count": 307
       },
       {
         "date": "2026-10-10",
-        "count": 309
+        "count": 307
       },
       {
         "date": "2026-10-11",
-        "count": 310
+        "count": 308
       },
       {
         "date": "2026-10-12",
-        "count": 311
+        "count": 309
       },
       {
         "date": "2026-10-13",
-        "count": 312
+        "count": 310
       },
       {
         "date": "2026-10-14",
-        "count": 314
+        "count": 312
       },
       {
         "date": "2026-10-15",
-        "count": 317
+        "count": 315
       },
       {
         "date": "2026-10-16",
-        "count": 318
+        "count": 316
       },
       {
         "date": "2026-10-17",
-        "count": 318
+        "count": 316
       },
       {
         "date": "2026-10-18",
-        "count": 322
+        "count": 320
       },
       {
         "date": "2026-10-19",
-        "count": 323
+        "count": 321
       },
       {
         "date": "2026-10-20",
-        "count": 327
+        "count": 325
       },
       {
         "date": "2026-10-21",
-        "count": 330
+        "count": 328
       },
       {
         "date": "2026-10-22",
-        "count": 331
+        "count": 329
       },
       {
         "date": "2026-10-23",
-        "count": 333
+        "count": 331
       },
       {
         "date": "2026-10-24",
-        "count": 335
+        "count": 333
       },
       {
         "date": "2026-10-25",
-        "count": 337
+        "count": 335
       },
       {
         "date": "2026-10-26",
-        "count": 339
+        "count": 337
       },
       {
         "date": "2026-10-27",
-        "count": 339
+        "count": 337
       },
       {
         "date": "2026-10-28",
-        "count": 340
+        "count": 338
       },
       {
         "date": "2026-10-29",
-        "count": 340
+        "count": 338
       },
       {
         "date": "2026-10-30",
-        "count": 342
+        "count": 340
       },
       {
         "date": "2026-10-31",
-        "count": 343
+        "count": 341
       },
       {
         "date": "2026-11-01",
-        "count": 343
+        "count": 341
       },
       {
         "date": "2026-11-02",
-        "count": 346
+        "count": 344
       },
       {
         "date": "2026-11-03",
-        "count": 346
+        "count": 344
       },
       {
         "date": "2026-11-04",
-        "count": 347
+        "count": 345
       },
       {
         "date": "2026-11-05",
-        "count": 349
+        "count": 348
       },
       {
         "date": "2026-11-06",
+        "count": 349
+      },
+      {
+        "date": "2026-11-07",
         "count": 349
       }
     ]
@@ -332,27 +342,16 @@
     "afdian": "https://afdian.com/a/hxwd94666"
   },
   "username": "hxwd94666",
-  "as_of": "2026-11-06",
+  "as_of": "2026-11-07",
   "repos": [
     {
       "name": "AutoTappo",
       "full_name": "hxwd94666/AutoTappo",
-      "fork": true,
-      "stargazers_count": 0,
+      "fork": false,
+      "stargazers_count": 1,
       "forks_count": 0,
-      "language": null,
+      "language": "Rust",
       "html_url": "https://github.com/hxwd94666/AutoTappo",
-      "open_issues_count": 0,
-      "license_spdx": null
-    },
-    {
-      "name": "Dumper-7",
-      "full_name": "hxwd94666/Dumper-7",
-      "fork": true,
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "language": null,
-      "html_url": "https://github.com/hxwd94666/Dumper-7",
       "open_issues_count": 0,
       "license_spdx": null
     },
@@ -382,7 +381,7 @@
       "name": "NTE-Drive-Calculator",
       "full_name": "hxwd94666/NTE-Drive-Calculator",
       "fork": false,
-      "stargazers_count": 344,
+      "stargazers_count": 343,
       "forks_count": 19,
       "language": "Python",
       "html_url": "https://github.com/hxwd94666/NTE-Drive-Calculator",
@@ -399,17 +398,6 @@
       "html_url": "https://github.com/hxwd94666/NTEUID",
       "open_issues_count": 0,
       "license_spdx": "GPL-3.0"
-    },
-    {
-      "name": "ok-script",
-      "full_name": "hxwd94666/ok-script",
-      "fork": true,
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "language": "Python",
-      "html_url": "https://github.com/hxwd94666/ok-script",
-      "open_issues_count": 0,
-      "license_spdx": "NOASSERTION"
     },
     {
       "name": "ok-wuthering-waves",
@@ -498,7 +486,7 @@
       "assets": [
         {
           "name": "NTE_Drive_Calc_Setup_2.3.1.exe",
-          "download_count": 1783
+          "download_count": 1839
         }
       ]
     },
@@ -2167,8 +2155,8 @@
     },
     {
       "date": "2026-10-17",
-      "level": 1,
-      "count": 1
+      "level": 0,
+      "count": 0
     },
     {
       "date": "2026-10-18",
@@ -2188,7 +2176,7 @@
     {
       "date": "2026-10-21",
       "level": 1,
-      "count": 8
+      "count": 7
     },
     {
       "date": "2026-10-22",
@@ -2258,7 +2246,7 @@
     {
       "date": "2026-11-04",
       "level": 1,
-      "count": 2
+      "count": 1
     },
     {
       "date": "2026-11-05",
@@ -2267,34 +2255,39 @@
     },
     {
       "date": "2026-11-06",
-      "level": 0,
-      "count": 0
+      "level": 1,
+      "count": 1
+    },
+    {
+      "date": "2026-11-07",
+      "level": 1,
+      "count": 2
     }
   ],
   "refresh": {
     "github": {
       "status": "fresh",
-      "attempted_at": "2026-11-05T20:41:41+00:00"
+      "attempted_at": "2026-11-06T19:58:05+00:00"
     },
     "community": {
       "status": "fresh",
-      "attempted_at": "2026-11-05T20:41:44+00:00"
+      "attempted_at": "2026-11-06T19:58:08+00:00"
     },
     "star_growth": {
       "status": "fresh",
-      "attempted_at": "2026-11-05T20:41:47+00:00"
+      "attempted_at": "2026-11-06T19:58:10+00:00"
     },
     "steam": {
       "status": "fresh",
-      "attempted_at": "2026-11-05T20:41:48+00:00"
+      "attempted_at": "2026-11-06T19:58:11+00:00"
     },
     "bangumi": {
       "status": "fresh",
-      "attempted_at": "2026-11-05T20:41:48+00:00"
+      "attempted_at": "2026-11-06T19:58:12+00:00"
     },
     "bilibili": {
       "status": "fresh",
-      "attempted_at": "2026-11-05T20:41:50+00:00"
+      "attempted_at": "2026-11-06T19:59:10+00:00"
     }
   }
 }
