@@ -8,10 +8,10 @@
   },
   "languages_by_repo": {
     "AutoTappo": {
-      "Rust": 199244,
-      "JavaScript": 59858,
-      "CSS": 10896,
-      "HTML": 8444,
+      "Rust": 200736,
+      "JavaScript": 79209,
+      "CSS": 11126,
+      "HTML": 8903,
       "NSIS": 539
     },
     "hxwd94666": {
@@ -37,7 +37,7 @@
     "prs_merged": 11,
     "prs_closed_unmerged": 3
   },
-  "community_as_of": "2026-11-07",
+  "community_as_of": "2026-11-20",
   "steam": {
     "id": "76561198402274250",
     "url": "https://steamcommunity.com/profiles/76561198402274250/",
@@ -45,7 +45,7 @@
     "state": "offline",
     "member_since": "July 6, 2017",
     "privacy": "public",
-    "as_of": "2026-11-07",
+    "as_of": "2026-11-20",
     "level": 18,
     "games": 107,
     "badges": 13
@@ -53,14 +53,14 @@
   "bangumi": {
     "username": "hxwd94666",
     "url": "https://bgm.tv/user/hxwd94666",
-    "as_of": "2026-11-07",
+    "as_of": "2026-11-20",
     "subject_type": 2,
     "counts": {
       "1": 4,
       "2": 24,
-      "3": 12,
+      "3": 9,
       "4": 3,
-      "5": 6
+      "5": 9
     },
     "total": 49
   },
@@ -69,12 +69,12 @@
     "url": "https://space.bilibili.com/436632831",
     "name": "\u98de\u884c\u5e93\u51af",
     "avatar_url": "https://i0.hdslb.com/bfs/face/21e43b46de5baef42ee4b65a032e4895bae5da7b.jpg",
-    "as_of": "2026-11-07",
+    "as_of": "2026-11-20",
     "source": "anonymous_public_api",
-    "followers": 1122,
+    "followers": 1161,
     "following": 40,
     "videos": 31,
-    "likes": 22042,
+    "likes": 22135,
     "level": 6
   },
   "star_growth": {
@@ -342,7 +342,7 @@
     "afdian": "https://afdian.com/a/hxwd94666"
   },
   "username": "hxwd94666",
-  "as_of": "2026-11-07",
+  "as_of": "2026-11-20",
   "repos": [
     {
       "name": "AutoTappo",
@@ -385,7 +385,7 @@
       "forks_count": 19,
       "language": "Python",
       "html_url": "https://github.com/hxwd94666/NTE-Drive-Calculator",
-      "open_issues_count": 5,
+      "open_issues_count": 1,
       "license_spdx": "AGPL-3.0"
     },
     {
@@ -478,6 +478,18 @@
     }
   ],
   "releases": [
+    {
+      "tag_name": "2.4.0",
+      "draft": false,
+      "prerelease": false,
+      "published_at": "2026-11-19T20:43:54Z",
+      "assets": [
+        {
+          "name": "NTE_Drive_Calc_Setup_2.4.0.exe",
+          "download_count": 0
+        }
+      ]
+    },
     {
       "tag_name": "2.3.1",
       "draft": false,
@@ -2101,7 +2113,7 @@
     {
       "date": "2026-10-06",
       "level": 1,
-      "count": 1
+      "count": 2
     },
     {
       "date": "2026-10-07",
@@ -2110,8 +2122,8 @@
     },
     {
       "date": "2026-10-08",
-      "level": 0,
-      "count": 0
+      "level": 1,
+      "count": 1
     },
     {
       "date": "2026-10-09",
@@ -2126,12 +2138,12 @@
     {
       "date": "2026-10-11",
       "level": 1,
-      "count": 1
+      "count": 3
     },
     {
       "date": "2026-10-12",
-      "level": 0,
-      "count": 0
+      "level": 1,
+      "count": 1
     },
     {
       "date": "2026-10-13",
@@ -2140,18 +2152,18 @@
     },
     {
       "date": "2026-10-14",
-      "level": 0,
-      "count": 0
+      "level": 1,
+      "count": 2
     },
     {
       "date": "2026-10-15",
       "level": 1,
-      "count": 1
+      "count": 2
     },
     {
       "date": "2026-10-16",
       "level": 1,
-      "count": 2
+      "count": 4
     },
     {
       "date": "2026-10-17",
@@ -2256,38 +2268,104 @@
     {
       "date": "2026-11-06",
       "level": 1,
-      "count": 1
+      "count": 3
     },
     {
       "date": "2026-11-07",
       "level": 1,
+      "count": 4
+    },
+    {
+      "date": "2026-11-08",
+      "level": 1,
       "count": 2
+    },
+    {
+      "date": "2026-11-09",
+      "level": 0,
+      "count": 0
+    },
+    {
+      "date": "2026-11-10",
+      "level": 0,
+      "count": 0
+    },
+    {
+      "date": "2026-11-11",
+      "level": 0,
+      "count": 0
+    },
+    {
+      "date": "2026-11-12",
+      "level": 0,
+      "count": 0
+    },
+    {
+      "date": "2026-11-13",
+      "level": 0,
+      "count": 0
+    },
+    {
+      "date": "2026-11-14",
+      "level": 0,
+      "count": 0
+    },
+    {
+      "date": "2026-11-15",
+      "level": 1,
+      "count": 1
+    },
+    {
+      "date": "2026-11-16",
+      "level": 0,
+      "count": 0
+    },
+    {
+      "date": "2026-11-17",
+      "level": 1,
+      "count": 1
+    },
+    {
+      "date": "2026-11-18",
+      "level": 1,
+      "count": 1
+    },
+    {
+      "date": "2026-11-19",
+      "level": 0,
+      "count": 0
+    },
+    {
+      "date": "2026-11-20",
+      "level": 1,
+      "count": 1
     }
   ],
   "refresh": {
     "github": {
       "status": "fresh",
-      "attempted_at": "2026-11-06T19:58:05+00:00"
+      "attempted_at": "2026-11-19T20:54:29+00:00"
     },
     "community": {
       "status": "fresh",
-      "attempted_at": "2026-11-06T19:58:08+00:00"
+      "attempted_at": "2026-11-19T20:54:32+00:00"
     },
     "star_growth": {
-      "status": "fresh",
-      "attempted_at": "2026-11-06T19:58:10+00:00"
+      "status": "stale",
+      "attempted_at": "2026-11-19T20:54:34+00:00",
+      "error": "HTTPError: HTTP Error 403: rate limit exceeded"
     },
     "steam": {
       "status": "fresh",
-      "attempted_at": "2026-11-06T19:58:11+00:00"
+      "attempted_at": "2026-11-19T20:54:34+00:00"
     },
     "bangumi": {
       "status": "fresh",
-      "attempted_at": "2026-11-06T19:58:12+00:00"
+      "attempted_at": "2026-11-19T20:54:35+00:00"
     },
     "bilibili": {
       "status": "fresh",
-      "attempted_at": "2026-11-06T19:59:10+00:00"
+      "attempted_at": "2026-11-19T20:54:36+00:00"
     }
   }
 }
