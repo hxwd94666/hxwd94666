@@ -7,9 +7,9 @@ on:
         type: boolean
         default: true
   schedule:
-    # UTC 01/07/13/19:19 = Asia/Shanghai 09/15/21 and next-day 03:19.
-    # Skip only when every module is fresh; failed modules retry six hours later.
-    - cron: '19 1,7,13,19 * * *'
+    # UTC 01/13:19 = Asia/Shanghai 09:19 and 21:19.
+    # Skip only when every module is fresh; failed modules retry twelve hours later.
+    - cron: '19 1,13 * * *'
 permissions:
   contents: write
 concurrency:
