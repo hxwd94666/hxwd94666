@@ -1,5 +1,16 @@
-"""Reconstruct retained-star growth from GitHub's public aggregate history."""
+"""Star growth from daily snapshots of each repository's star count.
+
+GitHub publishes no per-day star history through a documented API, and the
+undocumented aggregate endpoint that used to back this card is no longer
+called. Every refresh records today's total for each owned repository; daily
+increments are derived from consecutive snapshots, so the series keeps growing
+from the day this module was switched over.
+"""
 import datetime as dt
+import json
+from pathlib import Path
+
+STATE = Path(__file__).resolve().parents[1] / 'data/star_history.json'
 
 
 def summarize(daily_by_repo, as_of):
@@ -15,50 +26,57 @@ def summarize(daily_by_repo, as_of):
         day = str(start + dt.timedelta(days=i))
         points.append({'date': day, 'count': sum(n for date, n in daily.items() if date <= day)})
     return {'as_of': as_of, 'timezone': 'GitHub-defined day buckets',
-            'basis': 'public_aggregate_star_history', 'daily_by_repo': daily_by_repo,
+            'basis': 'daily_star_count_snapshots', 'daily_by_repo': daily_by_repo,
             'total': sum(daily.values()),
             'received_30d': sum(n for day, n in daily.items() if str(start) <= day <= as_of),
             'points_30d': points}
 
 
-def collect(repos, as_of, get):
-    daily_by_repo = {}
+def load(path=STATE):
+    try:
+        return json.loads(Path(path).read_text(encoding='utf-8'))
+    except FileNotFoundError:
+        return {}
+
+
+def save(series, path=STATE):
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(series, indent=2, sort_keys=True) + '\n', encoding='utf-8', newline='\n')
+
+
+def to_increments(series):
+    """Turn cumulative per-day totals into the per-day star gains the cards draw."""
+    gains = {}
+    for name, points in series.items():
+        daily = {}
+        previous = None
+        for day in sorted(points):
+            value = points[day]
+            if previous is not None and value > previous:
+                daily[day] = value - previous
+            previous = value
+        gains[name] = daily
+    return gains
+
+
+def collect(repos, as_of, get=None, path=STATE):
+    """Record today's star totals, then summarise the last 30 days of gains."""
+    series = {name: {day: value for day, value in points.items() if day <= as_of}
+              for name, points in load(path).items()}
     for repo in repos:
         if repo['fork']:
             continue
-        daily = {}
-        weeks = set()
-        for page in range(1, 101):
-            # Listing individual stargazers now requires collaborator access.
-            # The aggregate history is public: never send a repository-scoped token.
-            rows = get(f'https://api.github.com/repos/{repo["full_name"]}/stargazers/history?per_page=30&page={page}', authenticated=False)
-            for row in rows:
-                counts = row['days']
-                assert type(row['week']) is int and row['week'] not in weeks, 'Invalid or repeated star-history week'
-                assert len(counts) == 7 and all(type(n) is int and n >= 0 for n in counts), 'Incomplete star-history day counts'
-                assert row['total'] == sum(counts), 'Star-history week total mismatch'
-                weeks.add(row['week'])
-                # The epoch labels the API's week. Do not re-bin daily aggregates
-                # into Asia/Shanghai: GitHub does not promise UTC day boundaries.
-                start = dt.datetime.fromtimestamp(row['week'], dt.timezone.utc).date()
-                for i, count in enumerate(counts):
-                    if count:
-                        day = str(start + dt.timedelta(days=i))
-                        assert day not in daily, 'Overlapping star-history weeks'
-                        daily[day] = count
-            if len(rows) < 30:
-                break
-        else:
-            raise RuntimeError('Incomplete star-history pagination')
-        assert sum(daily.values()) == repo['stargazers_count'], f'Star history/count mismatch for {repo["full_name"]}; retry with fresh counts'
-        daily_by_repo[repo['name']] = daily
-    return summarize(daily_by_repo, as_of)
+        points = series.setdefault(repo['name'], {})
+        points[as_of] = int(repo['stargazers_count'])
+    save(series, path)
+    return summarize(to_increments(series), as_of)
 
 
-def refresh(repos, as_of, get, previous=None):
-    """Keep the last verified series when the public history request fails."""
+def refresh(repos, as_of, get, previous=None, path=STATE):
+    """Keep the last verified series when today's snapshot cannot be written."""
     try:
-        return collect(repos, as_of, get)
+        return collect(repos, as_of, get, path=path)
     except Exception as error:
         if previous:
             from refresh_state import error_reason

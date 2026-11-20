@@ -101,12 +101,16 @@ class ProfileTests(unittest.TestCase):
         self.assertEqual(actual, dict(prior, refresh_status='stale', refresh_error='RuntimeError: offline fixture'))
         self.assertNotIn('refresh_status', prior)
 
-    def test_failed_star_growth_fetch_preserves_values(self):
+    def test_failed_star_growth_snapshot_preserves_values(self):
+        import tempfile
         from star_growth import refresh
         prior = json.loads((ROOT / 'data/stats.json').read_text(encoding='utf-8'))['star_growth']
-        def failed(*args, **kwargs): raise RuntimeError('API rate limit fixture')
         repos = [{'full_name': 'owner/repo', 'name': 'repo', 'fork': False, 'stargazers_count': 1}]
-        actual = refresh(repos, '2026-10-19', failed, previous=prior)
-        self.assertEqual(actual, dict(prior, refresh_status='stale', refresh_error='RuntimeError: API rate limit fixture'))
+        with tempfile.TemporaryDirectory() as temp:
+            actual = refresh(repos, '2026-10-19', None, previous=prior, path=Path(temp))
+        self.assertEqual(actual['refresh_status'], 'stale')
+        self.assertTrue(actual['refresh_error'])
+        for key, value in prior.items():
+            self.assertEqual(actual[key], value)
 
 if __name__ == '__main__': unittest.main()

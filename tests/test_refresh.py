@@ -167,60 +167,54 @@ class RefreshTests(unittest.TestCase):
 
 
 class StarHistoryTests(unittest.TestCase):
-    def test_public_history_pagination_and_daily_totals(self):
-        import datetime as dt
+    def test_daily_snapshots_become_daily_gains(self):
+        import pathlib
+        import tempfile
         from star_growth import collect
-        from unittest.mock import Mock
-        newest = dt.datetime(2026, 10, 18, tzinfo=dt.timezone.utc)
-        rows = []
-        for i in range(31):
-            counts = [2, 0, 3, 0, 0, 0, 0] if i == 0 else [1, 0, 0, 0, 0, 0, 0]
-            rows.append({'week': int((newest - dt.timedelta(weeks=i)).timestamp()), 'days': counts, 'total': sum(counts)})
-        get = Mock(side_effect=[rows[:30], rows[30:], []])
-        repos = [{'name': 'repo', 'full_name': 'owner/repo', 'fork': False, 'stargazers_count': 35},
-                 {'name': 'empty', 'full_name': 'owner/empty', 'fork': False, 'stargazers_count': 0},
-                 {'name': 'fork', 'full_name': 'owner/fork', 'fork': True, 'stargazers_count': 999}]
-        actual = collect(repos, '2026-10-21', get)
-        self.assertEqual(actual['total'], 35)
-        self.assertEqual(actual['received_30d'], 8)
-        self.assertEqual(actual['points_30d'][0], {'date': '2026-09-22', 'count': 27})
-        self.assertEqual(actual['points_30d'][-1], {'date': '2026-10-21', 'count': 35})
-        self.assertEqual(len(actual['points_30d']), 30)
-        self.assertEqual(actual['daily_by_repo']['empty'], {})
-        self.assertEqual(actual['basis'], 'public_aggregate_star_history')
-        self.assertEqual(get.call_count, 3)
-        for call in get.call_args_list:
-            self.assertIn('/stargazers/history?per_page=30&page=', call.args[0])
-            self.assertEqual(call.kwargs, {'authenticated': False})
-        self.assertIn('page=2', get.call_args_list[1].args[0])
+        state = {'repo': {'2026-10-01': 30, '2026-10-20': 33}}
+        with tempfile.TemporaryDirectory() as temp:
+            path = pathlib.Path(temp) / 'star_history.json'
+            path.write_text(json.dumps(state), encoding='utf-8')
+            repos = [{'name': 'repo', 'full_name': 'owner/repo', 'fork': False, 'stargazers_count': 35},
+                     {'name': 'empty', 'full_name': 'owner/empty', 'fork': False, 'stargazers_count': 0},
+                     {'name': 'fork', 'full_name': 'owner/fork', 'fork': True, 'stargazers_count': 999}]
+            actual = collect(repos, '2026-10-21', path=path)
+            self.assertEqual(actual['total'], 5)
+            self.assertEqual(actual['received_30d'], 5)
+            self.assertEqual(actual['daily_by_repo']['empty'], {})
+            self.assertNotIn('fork', actual['daily_by_repo'])
+            self.assertEqual(actual['basis'], 'daily_star_count_snapshots')
+            self.assertEqual(len(actual['points_30d']), 30)
+            self.assertEqual(actual['points_30d'][-1], {'date': '2026-10-21', 'count': 5})
+            stored = json.loads(path.read_text(encoding='utf-8'))
+            self.assertEqual(stored['repo']['2026-10-21'], 35)
+            self.assertNotIn('fork', stored)
 
-    def test_invalid_or_denied_history_preserves_verified_series(self):
+    def test_snapshot_write_failure_preserves_verified_series(self):
+        import pathlib
+        import tempfile
         from star_growth import refresh
-        from urllib.error import HTTPError
-        from unittest.mock import Mock
         prior = json.loads((ROOT / 'data/stats.json').read_text(encoding='utf-8'))['star_growth']
         original = copy.deepcopy(prior)
-        valid = {'week': 1792281600, 'total': 1, 'days': [1, 0, 0, 0, 0, 0, 0]}
-        cases = [[dict(valid, days=[1])], [dict(valid, total=2)], [valid, valid],
-                 [dict(valid, total=0, days=[0]*7)], HTTPError('https://api.github.com/history', 403, 'Forbidden', {}, None)]
-        for case in cases:
-            with self.subTest(case=type(case).__name__):
-                get = Mock(side_effect=case) if isinstance(case, Exception) else Mock(return_value=case)
-                result = refresh([{'name': 'repo', 'full_name': 'owner/repo', 'fork': False, 'stargazers_count': 1}], '2026-10-21', get, prior)
-                for key, value in prior.items():self.assertEqual(result[key], value)
-                self.assertEqual(result['refresh_status'], 'stale')
-                self.assertTrue(result['refresh_error'])
-                self.assertEqual(prior, original)
+        with tempfile.TemporaryDirectory() as temp:
+            result = refresh([{'name': 'repo', 'full_name': 'owner/repo', 'fork': False, 'stargazers_count': 1}],
+                             '2026-10-21', None, prior, path=pathlib.Path(temp))
+        for key, value in prior.items():
+            self.assertEqual(result[key], value)
+        self.assertEqual(result['refresh_status'], 'stale')
+        self.assertTrue(result['refresh_error'])
+        self.assertEqual(prior, original)
 
-    def test_public_history_request_omits_authorization(self):
-        from unittest.mock import MagicMock
-        response = MagicMock()
-        response.__enter__.return_value.read.return_value = b'[]'
-        with patch.dict(os.environ, {'GH_TOKEN': 'fixture-token'}), patch.object(updater, 'urlopen', return_value=response) as open_url:
-            self.assertEqual(updater.get('https://api.github.com/history', authenticated=False), [])
-            self.assertFalse(open_url.call_args.args[0].has_header('Authorization'))
-            updater.get('https://api.github.com/repos/owner/repo')
-            self.assertEqual(open_url.call_args.args[0].get_header('Authorization'), 'Bearer fixture-token')
+    def test_star_growth_makes_no_network_calls(self):
+        import pathlib
+        import tempfile
+        from unittest.mock import Mock
+        from star_growth import collect
+        get = Mock()
+        with tempfile.TemporaryDirectory() as temp:
+            collect([{'name': 'r', 'full_name': 'owner/r', 'fork': False, 'stargazers_count': 2}],
+                    '2026-10-21', get, path=pathlib.Path(temp) / 'star_history.json')
+        get.assert_not_called()
 
 
 if __name__ == '__main__':unittest.main()

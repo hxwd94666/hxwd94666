@@ -24,21 +24,44 @@ def pages(url):
         if len(batch)<100:return items
     raise RuntimeError('Pagination limit exceeded')
 
-class Calendar(HTMLParser):
-    def __init__(self):super().__init__();self.days={};self.tip=None
-    def handle_starttag(self,tag,attrs):
-        a=dict(attrs)
-        if tag=='td' and 'data-date' in a:self.days[a['id']]={'date':a['data-date'],'level':int(a['data-level'])}
-        if tag=='tool-tip':self.tip=a.get('for')
-    def handle_endtag(self,tag):
-        if tag=='tool-tip':self.tip=None
-    def handle_data(self,text):
-        if self.tip in self.days and 'contribution' in text:
-            m=re.match(r'([\d,]+) contributions?',text)
-            if text.startswith('No contributions'):count=0
-            elif m:count=int(m[1].replace(',',''))
-            else:raise ValueError('Unexpected calendar tooltip')
-            self.days[self.tip]['count']=count
+CONTRIBUTIONS_QUERY='''query($from:DateTime!,$to:DateTime!){
+  viewer{contributionsCollection(from:$from,to:$to){
+    contributionCalendar{weeks{contributionDays{date contributionCount}}}
+  }}
+}'''
+
+
+def graphql(query,variables):
+    token=os.environ.get('GH_TOKEN') or os.environ.get('GITHUB_TOKEN')
+    if not token:raise RuntimeError('GH_TOKEN is required for GraphQL')
+    body=json.dumps({'query':query,'variables':variables}).encode('utf-8')
+    request=Request('https://api.github.com/graphql',data=body,method='POST',
+                     headers={'Authorization':'Bearer '+token,'Content-Type':'application/json',
+                              'Accept':'application/json','User-Agent':'WuDu-Profile'})
+    with urlopen(request,timeout=45) as response:
+        payload=json.loads(response.read().decode('utf-8'))
+    if payload.get('errors'):
+        raise RuntimeError('GraphQL: '+'; '.join(str(e.get('message','?')) for e in payload['errors']))
+    return payload['data']
+
+
+def collect_contributions(today):
+    """Year-to-date contribution days from the documented GraphQL calendar."""
+    data=graphql(CONTRIBUTIONS_QUERY,{'from':f'{today[:4]}-01-01T00:00:00Z','to':f'{today}T23:59:59Z'})
+    weeks=data['viewer']['contributionsCollection']['contributionCalendar']['weeks']
+    counts={day['date']:day['contributionCount'] for week in weeks for day in week['contributionDays']}
+    end=dt.date.fromisoformat(today);cursor=dt.date.fromisoformat(f'{today[:4]}-01-01')
+    days=[]
+    while cursor<=end:
+        key=cursor.isoformat()
+        if key not in counts:raise ValueError('Missing contribution day '+key)
+        days.append({'date':key,'count':counts[key]})
+        cursor+=dt.timedelta(days=1)
+    peak=max((d['count'] for d in days),default=0) or 1
+    for d in days:
+        d['level']=0 if d['count']==0 else 1+min(3,round(3*d['count']/peak))
+    assert len(days)==end.timetuple().tm_yday,'Incomplete calendar'
+    return days
 
 def collect_repos():
     return [r for r in pages(f'https://api.github.com/users/{USER}/repos?type=owner') if not r['private']]
@@ -46,9 +69,7 @@ def collect_repos():
 
 def collect_github(today, repos):
     releases=[r for r in pages(f'https://api.github.com/repos/{USER}/{PROJECT}/releases') if not r['draft']]
-    parser=Calendar();parser.feed(get(f'https://github.com/users/{USER}/contributions?from={today[:4]}-01-01&to={today}',False))
-    days=sorted((d for d in parser.days.values() if f'{today[:4]}-01-01'<=d['date']<=today),key=lambda d:d['date'])
-    assert len(days)==dt.date.fromisoformat(today).timetuple().tm_yday and all('count' in d for d in days),'Incomplete calendar'
+    days=collect_contributions(today)
     account_data=get(f'https://api.github.com/users/{USER}')
     account={k:account_data.get(k) for k in ['created_at','followers','following','public_repos','public_gists']}
     languages_by_repo={r['name']:get(r['languages_url']) for r in repos if not r['fork']}
