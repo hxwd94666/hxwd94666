@@ -37,7 +37,7 @@
     "prs_merged": 11,
     "prs_closed_unmerged": 3
   },
-  "community_as_of": "2026-11-22",
+  "community_as_of": "2026-11-23",
   "steam": {
     "id": "76561198402274250",
     "url": "https://steamcommunity.com/profiles/76561198402274250/",
@@ -45,15 +45,15 @@
     "state": "offline",
     "member_since": "July 6, 2017",
     "privacy": "public",
-    "as_of": "2026-11-22",
+    "as_of": "2026-11-23",
     "level": 18,
-    "games": 107,
+    "games": 108,
     "badges": 13
   },
   "bangumi": {
     "username": "hxwd94666",
     "url": "https://bgm.tv/user/hxwd94666",
-    "as_of": "2026-11-22",
+    "as_of": "2026-11-23",
     "subject_type": 2,
     "counts": {
       "1": 4,
@@ -69,16 +69,16 @@
     "url": "https://space.bilibili.com/436632831",
     "name": "\u98de\u884c\u5e93\u51af",
     "avatar_url": "https://i0.hdslb.com/bfs/face/21e43b46de5baef42ee4b65a032e4895bae5da7b.jpg",
-    "as_of": "2026-11-22",
+    "as_of": "2026-11-23",
     "source": "anonymous_public_api",
-    "followers": 1162,
+    "followers": 1163,
     "following": 40,
     "videos": 31,
     "likes": 22147,
     "level": 6
   },
   "star_growth": {
-    "as_of": "2026-11-22",
+    "as_of": "2026-11-23",
     "timezone": "GitHub-defined day buckets",
     "basis": "daily_star_count_snapshots",
     "daily_by_repo": {
@@ -203,10 +203,6 @@
     "received_30d": 2,
     "points_30d": [
       {
-        "date": "2026-10-24",
-        "count": 336
-      },
-      {
         "date": "2026-10-25",
         "count": 336
       },
@@ -320,6 +316,10 @@
       },
       {
         "date": "2026-11-22",
+        "count": 338
+      },
+      {
+        "date": "2026-11-23",
         "count": 338
       }
     ]
@@ -2330,28 +2330,28 @@
   "refresh": {
     "github": {
       "status": "stale",
-      "attempted_at": "2026-11-22T12:35:51+00:00",
-      "error": "RuntimeError: GraphQL: Something went wrong while executing your query on 2026-11-22T12:36:01Z. Please include `4C73:61924:115D071:37F5CE3:6B02E1A8` when reporting this issue."
+      "attempted_at": "2026-11-23T14:38:37+00:00",
+      "error": "RuntimeError: GraphQL: Something went wrong while executing your query on 2026-11-23T14:38:42Z. Please include `6403:38500A:1E5226:6155EA:6B044FEE` when reporting this issue."
     },
     "community": {
       "status": "fresh",
-      "attempted_at": "2026-11-22T12:36:01+00:00"
+      "attempted_at": "2026-11-23T14:38:42+00:00"
     },
     "star_growth": {
       "status": "fresh",
-      "attempted_at": "2026-11-22T12:36:03+00:00"
+      "attempted_at": "2026-11-23T14:38:45+00:00"
     },
     "steam": {
       "status": "fresh",
-      "attempted_at": "2026-11-22T12:36:03+00:00"
+      "attempted_at": "2026-11-23T14:38:45+00:00"
     },
     "bangumi": {
       "status": "fresh",
-      "attempted_at": "2026-11-22T12:36:03+00:00"
+      "attempted_at": "2026-11-23T14:38:46+00:00"
     },
     "bilibili": {
       "status": "fresh",
-      "attempted_at": "2026-11-22T12:36:04+00:00"
+      "attempted_at": "2026-11-23T14:38:46+00:00"
     }
   }
 }
